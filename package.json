@@ -48,7 +48,8 @@
     "request": "2.88.2",
     "socket.io": "2.3.0",
     "socket.io-adapter-mongo": "2.0.5",
-    "time-ago": "0.2.1"
+    "time-ago": "0.2.1",
+    "validator": "13.1.1"
   },
   "devDependencies": {
     "eslint": "^7.3.0",
