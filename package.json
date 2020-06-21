@@ -20,6 +20,7 @@
     "apikeygen": "1.1.0",
     "array-tools": "2.0.9",
     "axios": "0.19.2",
+    "babel-eslint": "10.1.0",
     "bcrypt": "5.0.0",
     "compression": "1.7.4",
     "connect-mongo": "3.2.0",
@@ -48,5 +49,10 @@
     "socket.io": "2.3.0",
     "socket.io-adapter-mongo": "2.0.5",
     "time-ago": "0.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.21.2"
   }
 }
