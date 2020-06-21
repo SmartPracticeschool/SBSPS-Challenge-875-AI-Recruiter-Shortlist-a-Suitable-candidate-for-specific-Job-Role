@@ -141,17 +141,17 @@ const User = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room'
   }],
-  posts: {
-    type: Array,
-    default: []
-  },
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }],
   followers: {
-    type: Array,
-    default: []
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'onModel'
   },
   following: {
-    type: Array,
-    default: []
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'onModel'
   },
   notifications: {
     type: Array,
@@ -168,6 +168,10 @@ const User = mongoose.Schema({
   usertype: {
     type: String,
     default: 'user'
+  },
+  onModel: {
+    type: String,
+    enum: ['Company', 'User']
   }
 })
 

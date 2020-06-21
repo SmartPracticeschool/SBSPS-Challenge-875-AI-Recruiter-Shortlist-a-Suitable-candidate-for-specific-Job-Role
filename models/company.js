@@ -46,7 +46,11 @@ const companySchema = mongoose.Schema({
   usertype: {
     type: String,
     default: 'company'
-  }
+  },
+  post: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  }]
 })
 
 module.exports = mongoose.model('Company', companySchema)
