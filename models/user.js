@@ -1,5 +1,11 @@
+const { db: { connectionUri } } = require('../config/app')
 const mongoose = require('mongoose')
 const validator = require('validator')
+
+mongoose.connect(connectionUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 
 const User = mongoose.Schema({
   username: String,
@@ -131,10 +137,10 @@ const User = mongoose.Schema({
       */
     }
   },
-  bio: {
-    type: String,
-    default: 'Connect with me on Apply-by-AI'
-  },
+  chats: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Room'
+  }],
   posts: {
     type: Array,
     default: []
@@ -154,8 +160,16 @@ const User = mongoose.Schema({
   hirable: {
     type: Boolean,
     default: true
+  },
+  applications: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Job'
+  }],
+  usertype: {
+    type: String,
+    default: 'user'
   }
 })
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', User)
+module.exports = mongoose.model('user', User)
