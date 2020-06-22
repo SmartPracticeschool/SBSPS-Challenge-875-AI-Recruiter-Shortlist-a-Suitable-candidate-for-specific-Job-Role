@@ -12,7 +12,7 @@ hydrabot:
           count: 2 
     pass: 
       - do: labels
-        labels: ['review']
+        labels: ['Review']
       - do: comment
         payload:
           body: This issue is now ready to be reviewed 
