@@ -35,10 +35,10 @@ const companySchema = mongoose.Schema({
       ref: 'Job'
     }
   ],
-  chats: {
-    type: Array,
-    default: []
-  },
+  chats: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Room'
+  }],
   notifications: {
     type: Array,
     default: []
