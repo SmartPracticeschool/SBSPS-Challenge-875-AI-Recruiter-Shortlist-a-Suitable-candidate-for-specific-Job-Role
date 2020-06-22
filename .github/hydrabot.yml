@@ -1,0 +1,54 @@
+branchName: short
+hydrabot:
+  - when: issue.opened
+    validate:
+      - do: assignee
+        max: 
+          count: 2
+  - when: pull_request.opened
+    validate:
+      - do: assignee
+        max: 
+          count: 2 
+    pass: 
+      - do: labels
+        labels: ['review']
+      - do: comment
+        payload:
+          body: This issue is now ready to be reviewed 
+  - when: pull_request.*, pull_request_review.*,
+    validate: 
+      - do: title 
+        must_exclude: 
+          regex: ^\[WIP\]
+          message: This PR is marked Work in Progress and cannot be merged
+        must_include: 
+          regex: ^Closes \#\d$
+          message: PR must be associated with one or more issues
+        must_include:
+          regex: ^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$
+          message: Semantic release conventions must be followed.
+      - do: description
+        must_include:
+          regex: ^Closes \#\d$
+          message: PR must be associated with one or more issues
+        must_include:
+          regex: approved:*
+          message: PR cannot be merged before being approved by maintainers
+        must_exclude:
+          regex: wip
+          message: This PR is marked Work in Progress and cannot be merged
+      - do: approvals
+        min:
+          count: 1
+          message: Minimum one approval required to merge this PR
+        block:
+          changes_request: true
+          message: Only one reviewer can request change at a time
+    pass:
+      - do: labels
+        labels: ['released']
+      - do: comment
+        payload:
+          body: PR now can be merged successfully 
+  
