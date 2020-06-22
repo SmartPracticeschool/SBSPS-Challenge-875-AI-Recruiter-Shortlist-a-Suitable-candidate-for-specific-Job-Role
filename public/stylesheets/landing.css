@@ -3476,7 +3476,7 @@ body {
 #banner input,
 #banner select,
 #banner textarea {
-  color: #ffffff;
+  color: black;
 }
 
 #banner a {
@@ -3563,6 +3563,16 @@ body {
   color: #ffffff !important;
 }
 
+#banner input[type="submit"].default,
+#banner input[type="reset"].default,
+#banner input[type="button"].default,
+#banner button.default,
+#banner .button.default {
+  border: none;
+  background-color: #ff5e01;
+  color: #ffffff !important;
+}
+
 #banner input[type="submit"].primary:hover,
 #banner input[type="reset"].primary:hover,
 #banner input[type="button"].primary:hover,
@@ -3571,12 +3581,28 @@ body {
   background-color: #86d0da;
 }
 
+#banner input[type="submit"].default:hover,
+#banner input[type="reset"].default:hover,
+#banner input[type="button"].default:hover,
+#banner button.default:hover,
+#banner .button.default:hover {
+  background-color:  #e77532;
+}
+
 #banner input[type="submit"].primary:active,
 #banner input[type="reset"].primary:active,
 #banner input[type="button"].primary:active,
 #banner button.primary:active,
 #banner .button.primary:active {
   background-color: #5ec2ce;
+}
+
+#banner input[type="submit"].default:active,
+#banner input[type="reset"].default:active,
+#banner input[type="button"].default:active,
+#banner button.default:active,
+#banner .button.default:active {
+  background-color: #e77532;
 }
 
 #banner input[type="submit"].primary.icon:before,

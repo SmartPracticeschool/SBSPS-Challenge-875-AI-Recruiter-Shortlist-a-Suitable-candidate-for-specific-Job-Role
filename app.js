@@ -9,7 +9,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const { Company, User } = require('./models')
 
-const { IndexRouter } = require('./routes')
+const { AccountRouter, IndexRouter } = require('./routes')
 
 const app = express()
 
@@ -121,6 +121,7 @@ app.use(async (req, res, next) => {
 })
 
 app.use('/', IndexRouter)
+app.use('/account', AccountRouter)
 app.use(async (req, res, next) => {
   if (req.session.user) {
     let user
