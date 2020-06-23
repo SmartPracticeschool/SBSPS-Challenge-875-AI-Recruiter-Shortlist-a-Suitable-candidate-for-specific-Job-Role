@@ -12,9 +12,9 @@ hydrabot:
           count: 2 
     pass: 
       - do: labels
-        labels: ['👓Review']
+        labels: ['👓 Review']
       - do: request_review
-        reviewers: ['und3fined-v01d']
+        reviewers: ['und3fined-v01d', 'vidhi-mody']
       - do: comment
         payload:
           body: This issue is now ready to be reviewed 
@@ -42,8 +42,9 @@ hydrabot:
           message: Only one reviewer can request change at a time
     pass:
       - do: labels
-        labels: ['🐛Released']
+        labels: ['✈️ Ready to merge']
       - do: comment
         payload:
-          body: PR now can be merged successfully 
+          body: PR can now can be merged successfully
+    
   
