@@ -41,10 +41,8 @@ hydrabot:
           changes_request: true
           message: Only one reviewer can request change at a time
     pass:
-      - do: labels
-        labels: ['🥳 Ready to merge']
       - do: comment
         payload:
-          body: PR can now can be merged successfully
+          body: PR can now can be merged successfully 🥳
     
   
