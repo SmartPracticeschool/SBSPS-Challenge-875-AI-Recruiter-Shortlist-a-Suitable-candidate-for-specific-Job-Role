@@ -25,21 +25,17 @@ $(document).ready(function () {
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="startDate">From*</label>
-            <input type="month" name="startDate[] " class="form-control" id="startDate" required />
+            <label for="workStartDate">From</label>
+            <input type="month" name="workStartDate[]" class="form-control" id="workStartDate"/>
           </div>
           <div class="form-group col-md-6">
-            <label for="endDate">To*</label>
-            <input type="month" name="endDate[]" class="form-control" id="endDate" required />
+            <label for="workEndDate">To (leave empty if present)</label>
+            <input type="month" name="workEndDate[]" class="form-control" id="workEndDate"/>
           </div>
         </div>
         <div class="form-group">
           <label for="workSummary">Job Description*</label>
-          <textarea class="form-control" id="workSummary" placeholder="Enter your job description" name="workSummary[]" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="highlights">Highlights</label>
-          <textarea class="form-control" id="highlights" placeholder="Markdown Supported" name="highlights[]"></textarea>
+          <textarea class="form-control" id="workSummary" placeholder="Enter your job description (Markdown Support)" name="workSummary[]" required></textarea>
         </div>
       </div>`
     )
