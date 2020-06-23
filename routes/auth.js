@@ -175,7 +175,7 @@ router.post('/new/user/info', userInfoMiddleware, async (req, res, next) => {
   lodash.set(req.session.passport.user, ['resume.basics.location'], req.body.location)
   const newUser = new User(req.session.passport.user)
   try {
-    await newUser.save().exec()
+    await newUser.save()
   } catch (error) {
     return res.render('error', {
       error
