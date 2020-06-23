@@ -28,7 +28,7 @@ const userInfoMiddleware = (req, res, next) => {
       startDate: req.body['startDate[]'],
       endDate: req.body['endDate[]'],
       summary: req.body['workSummary[]'],
-      highlights: [req.body['highlights[]']]
+      highlights: req.body['highlights[]'] ? [req.body['highlights[]']] : []
     })
   }
 
