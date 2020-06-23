@@ -11,34 +11,34 @@ $(document).ready(function () {
       `<div>
         <a href="#" class="remove_field" style="text-decoration:none;">❌</a>
         <div>
-          <label for="company">Company:</label>
+          <label for="company">Company*</label>
           <input type="text" class="form-control" placeholder="Company Name" name="company[]" required />
         </div> 
         <br>
         <div class="form-group">
-          <label for="position">Role:</label>
+          <label for="position">Role*</label>
           <input type="text" class="form-control" id="position" placeholder="Enter your job role" name="position[]" required />
         </div>
         <div class="form-group">
-          <label for="position">Company Website:</label>
+          <label for="position">Company Website*</label>
           <input type="url" class="form-control" id="companyWebsite" placeholder="Enter your company website" name="companyWebsite[]" required />
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="startDate">From:</label>
+            <label for="startDate">From*</label>
             <input type="month" name="startDate[] " class="form-control" id="startDate" required />
           </div>
           <div class="form-group col-md-6">
-            <label for="endDate">To:</label>
+            <label for="endDate">To*</label>
             <input type="month" name="endDate[]" class="form-control" id="endDate" required />
           </div>
         </div>
         <div class="form-group">
-          <label for="workSummary">Job Description:</label>
+          <label for="workSummary">Job Description*</label>
           <textarea class="form-control" id="workSummary" placeholder="Enter your job description" name="workSummary[]" required></textarea>
         </div>
         <div class="form-group">
-          <label for="highlights">Highlights:</label>
+          <label for="highlights">Highlights</label>
           <textarea class="form-control" id="highlights" placeholder="Markdown Supported" name="highlights[]"></textarea>
         </div>
       </div>`
@@ -61,30 +61,30 @@ $(document).ready(function () {
       `<div>
         <a href="#" class="remove_field1" style="text-decoration:none">❌</a>
         <div>
-          <label for="institution">Institution:</label>
+          <label for="institution">Institution*</label>
           <input type="text" class="form-control" placeholder="University/School Name" name="institution[]" required / >
         </div>
         <br>
         <div class="form-group">
-          <label for="studyType">Degree type:</label>
+          <label for="studyType">Degree type*</label>
           <input type="text" class="form-control" id="studyType" placeholder="Enter your Degree type (eg. Masters)" name="studyType[]" required />
         </div>
         <div class="form-group">
-          <label for="area">Stream/ Major:</label>
+          <label for="area">Stream/ Major*</label>
           <input type="text" class="form-control" id="area" placeholder="Enter your specialization" name="area[]" required />
         </div>
         <div class="form-row">
-          <div class="form-group col-md-6"><label for="studyStartDate">From:</label>
+          <div class="form-group col-md-6"><label for="studyStartDate">From*</label>
             <input type="month" name="studyStartDate[]" class="form-control" id="studyStartDate" required />
           </div>
           <div class="form-group col-md-6">
-            <label for="studyEndDate">To:</label>
+            <label for="studyEndDate">To*</label>
             <input type="month" name="studyEndDate[]" class="form-control" id="studyEndDate" required />
           </div>
         </div>
         <div class="form-group">
-          <label for="gpa">CGPA:</label>
-          <input type="text" class="form-control" id="gpa" placeholder="Enter your CGPA" name="gpa[]" required />
+          <label for="gpa">CGPA*</label>
+          <input type="number" class="form-control" id="gpa" placeholder="Enter your CGPA" name="gpa[]" min="0" max="4" step="0.01" required />
         </div>
       </div>
       `
@@ -107,20 +107,20 @@ $(document).ready(function () {
       `<div>
         <a href="#" class="remove_field2" style="text-decoration: none">❌</a>
         <div>
-          <label for="title">Title:</label>
+          <label for="title">Title*</label>
           <input type="text" class="form-control" placeholder="Title" name="title[]" required />
         </div>
         <br>
         <div class="form-group">
-          <label for="awarder">Issuer:</label>
+          <label for="awarder">Issuer*</label>
           <input type="text" class="form-control" id="awarder" placeholder="Enter the issuer" name="awarder[]" required />
         </div>
         <div class="form-group">
-          <label for="date">Honor Date:</label>
-          <input type="date" name="date[]" class="form-control" id="date" required />
+          <label for="date">Honor Date*</label>
+          <input type="month" name="date[]" class="form-control" id="date" required />
         </div>
         <div class="form-group">
-          <label for="awardSummary">Summary:</label>
+          <label for="awardSummary">Summary*</label>
           <textarea type="text" class="form-control" id="awardSummary" placeholder="Describe your achievement" name="awardSummary[]" required />
           </textarea>
         </div>
@@ -145,15 +145,17 @@ $(document).ready(function () {
       `<div>
         <a href="#" class="remove_field3" style="text-decoration: none">❌</a>
         <div>
-          <label for="skills">Skills:</label>
+          <label for="skillName">Name*</label>
           <input type="text" class="form-control" id="skillName" placeholder="Name (eg. Web Development, Programming)" name="skillName[]" required />
           <br>
+          <label for="level">Level*</label>
           <select name="level[]" class="form-control" id="level" required>
             <option>Master</option>
             <option>Intermediate</option>
             <option>Beginner</option>
           </select>
           <br>
+          <label for="keywords">Keywords*</label>
           <textarea type="text" class="form-control" id="keywords" placeholder="Enter your skills as a comma separated list (eg. Python, JavaScript)" name="keywords[]" required></textarea>
         </div>
       </div>
@@ -177,18 +179,21 @@ $(document).ready(function () {
     $(wrapper4).append(
       `
       <div>
-        <label for="referral">Name:</label>
-        <input type="text" class="form-control" id="referral" name="referral[]" required />
-        <br>
-        <label for="reference">Reference:</label>
-        <textarea type="text" class="form-control" id="reference" name="reference[]" required ></textarea>
-      </div> 
+        <a href="#" class="remove_field4" style="text-decoration: none">❌</a>
+        <div>
+          <label for="referral">Name*</label>
+          <input type="text" class="form-control" id="referral" name="referral[]" required />
+          <br>
+          <label for="reference">Reference*</label>
+          <textarea type="text" class="form-control" id="reference" name="reference[]" required ></textarea>
+        </div> 
+      </div>
       `
     )
   })
 
   //Once remove button is clicked
-  $(wrapper4).on('click', '.remove_field3', function (e) {
+  $(wrapper4).on('click', '.remove_field4', function (e) {
     e.preventDefault()
     $(this).parent('div').remove() //Remove field html
   })
