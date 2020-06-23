@@ -19,19 +19,27 @@ $(document).ready(function () {
           <label for="position">Role:</label>
           <input type="text" class="form-control" id="position" placeholder="Enter your job role" name="position[]" required />
         </div>
+        <div class="form-group">
+          <label for="position">Company Website:</label>
+          <input type="url" class="form-control" id="companyWebsite" placeholder="Enter your company website" name="companyWebsite[]" required />
+        </div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="startDate">From:</label>
-            <input type="date" name="startDate[] " class="form-control" id="startDate" required />
+            <input type="month" name="startDate[] " class="form-control" id="startDate" required />
           </div>
           <div class="form-group col-md-6">
             <label for="endDate">To:</label>
-            <input type="date" name="endDate[]" class="form-control" id="endDate" required />
+            <input type="month" name="endDate[]" class="form-control" id="endDate" required />
           </div>
         </div>
         <div class="form-group">
           <label for="workSummary">Job Description:</label>
           <textarea class="form-control" id="workSummary" placeholder="Enter your job description" name="workSummary[]" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="highlights">Highlights:</label>
+          <textarea class="form-control" id="highlights" placeholder="Markdown Supported" name="highlights[]"></textarea>
         </div>
       </div>`
     )
@@ -67,11 +75,11 @@ $(document).ready(function () {
         </div>
         <div class="form-row">
           <div class="form-group col-md-6"><label for="studyStartDate">From:</label>
-            <input type="date" name="studyStartDate[]" class="form-control" id="studyStartDate" required />
+            <input type="month" name="studyStartDate[]" class="form-control" id="studyStartDate" required />
           </div>
           <div class="form-group col-md-6">
             <label for="studyEndDate">To:</label>
-            <input type="date" name="studyEndDate[]" class="form-control" id="studyEndDate" required />
+            <input type="month" name="studyEndDate[]" class="form-control" id="studyEndDate" required />
           </div>
         </div>
         <div class="form-group">
@@ -140,7 +148,7 @@ $(document).ready(function () {
           <label for="skills">Skills:</label>
           <input type="text" class="form-control" id="skillName" placeholder="Name (eg. Web Development, Programming)" name="skillName[]" required />
           <br>
-          <select name="level[]" class="form-control" id="level">
+          <select name="level[]" class="form-control" id="level" required>
             <option>Master</option>
             <option>Intermediate</option>
             <option>Beginner</option>
@@ -155,6 +163,32 @@ $(document).ready(function () {
 
   //Once remove button is clicked
   $(wrapper3).on('click', '.remove_field3', function (e) {
+    e.preventDefault()
+    $(this).parent('div').remove() //Remove field html
+  })
+
+  var addButton4 = $('.add_button4') //Add button selector
+  var wrapper4 = $('.field_wrapper4') //Input field wrapper
+
+  //Once add button is clicked
+  $(addButton4).click(function (e) {
+    //Check maximum number of input fields
+    e.preventDefault()
+    $(wrapper4).append(
+      `
+      <div>
+        <label for="referral">Name:</label>
+        <input type="text" class="form-control" id="referral" name="referral[]" required />
+        <br>
+        <label for="reference">Reference:</label>
+        <textarea type="text" class="form-control" id="reference" name="reference[]" required ></textarea>
+      </div> 
+      `
+    )
+  })
+
+  //Once remove button is clicked
+  $(wrapper4).on('click', '.remove_field3', function (e) {
     e.preventDefault()
     $(this).parent('div').remove() //Remove field html
   })

@@ -31,7 +31,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="summary">Bio</label>
-                                    <input type="text" class="form-control" id="summary" placeholder="A short bio describing you" name="summary" required/>
+                                    <textarea class="form-control" id="summary" placeholder="A short bio describing you" name="summary" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="expertise">Area of Expertise</label>
+                                    <input type="text" class="form-control" id="expertise" placeholder="(eg. Software Developer)" name="expertise" required/>
                                 </div>
 
                                 <h3 style="color: black; text-align: left; margin-top: 40px;">LOCATION</h3>
@@ -63,113 +67,38 @@
                                 <h3 style="color: black; text-align: left; margin-top: 40px;">WORK EXPERIENCE</h3>
                                 <div class="form-group">
                                     <div class="field_wrapper">
-                                    <div>
-                                        <div>
-                                            <label for="company">Company:</label>
-                                            <input type="text" class="form-control" placeholder="Company Name" name="company[]" required />
-                                        </div>
-                                        <br>
-                                        <div class="form-group">
-                                            <label for="position">Role:</label>
-                                            <input type="text" class="form-control" id="position" placeholder="Enter your job role" name="position[]" required />
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="startDate">From:</label>
-                                                <input type="date" name="startDate[]" class="form-control" id="startDate" required />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="endDate">To:</label>
-                                                <input type="date" name="endDate[]" class="form-control" id="endDate" required />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="workSummary">Job Description:</label>
-                                            <textarea class="form-control" id="workSummary" placeholder="Enter your job description" name="workSummary[]" required ></textarea>
-                                        </div>
                                     </div>
-                                </div>
                                     <button class="button default btn btn-default add_button">Add</button>
                                 </div>
         
                                 <h3 style="color: black; text-align: left; margin-top: 40px;">EDUCATION</h3>
                                 <div class="form-group">
                                     <div class="field_wrapper1">
-                                        <div>
-                                        <div>
-                                            <label for="institution">Institution:</label>
-                                            <input type="text" class="form-control" placeholder="University/School Name" name="institution[]" required />
-                                        </div>
-                                        <br>
-                                        <div class="form-group">
-                                            <label for="studyType">Degree type:</label>
-                                            <input type="text" class="form-control" id="studyType" placeholder="Enter your Degree type (eg. Masters)" name="studyType[]" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="area">Stream/ Major:</label>
-                                            <input type="text" class="form-control" id="area" placeholder="Enter your specialization" name="area[]" required />
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="studyStartDate">From:</label>
-                                                <input type="date" name="studyStartDate[]" class="form-control" id="studyStartDate" required />
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="studyEndDate">To:</label>
-                                                <input type="date" name="studyEndDate[]" class="form-control" id="studyEndDate" required />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="gpa">CGPA:</label>
-                                            <input type="text" class="form-control" id="gpa" placeholder="Enter your CGPA" name="gpa[]" required />
-                                        </div>    
                                     </div>
-                                </div>
                                     <button class="button default btn btn-default add_button1">Add</button>
                                 </div>
         
                                 <h3 style="color: black; text-align: left; margin-top: 40px;">ACHIEVEMENTS</h3>
                                 <div class="form-group">
                                     <div class="field_wrapper2">
-                                        <div>
-                                            <div>
-                                                <label for="title">Title:</label>
-                                                <input type="text" class="form-control" placeholder="Title" name="title[]" required />
-                                            </div>
-                                            <br>
-                                            <div class="form-group">
-                                                <label for="awarder">Issuer:</label>
-                                                <input type="text" class="form-control" id="awarder" placeholder="Enter the issuer" name="awarder[]" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="date">Honor Date:</label>
-                                                <input type="date" name="date[]" class="form-control" id="date" required />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="awardSummary">Summary:</label>
-                                                <textarea type="text" class="form-control" id="awardSummary" placeholder="Describe your achievement" name="awardSummary[]" required></textarea>
-                                            </div>    
-                                        </div>
                                     </div>
                                     <button class="button default btn btn-default add_button2">Add</button>
                                 </div>
+
+                                <h3 style="color: black; text-align: left; margin-top: 40px;">SKILLS</h3>
                                 <div class="form-group">
-                                    <div class="field_wrapper3">
-                                        <div>
-                                            <label for="skills">Skills:</label>
-                                            <input type="text" class="form-control" id="skillName" placeholder="Name (eg. Web Development, Programming)" name="skillName[]" required />
-                                            <br>
-                                            <select name="level[]" class="form-control" id="level">
-                                                <option>Master</option>
-                                                <option>Intermediate</option>
-                                                <option>Beginner</option>
-                                            </select>
-                                            <br>
-                                            <textarea type="text" class="form-control" id="keywords" placeholder="Enter your skills as a comma separated list (eg. Python, JavaScript)" name="keywords[]" required></textarea>
-                                        </div>  
+                                    <div class="field_wrapper3">  
                                     </div>
                                     <br>
                                     <button class="button default btn btn-default add_button3">Add</button>
+                                </div>
+
+                                <h3 style="color: black; text-align: left; margin-top: 40px;">REFERENCES</h3>
+                                <div class="form-group">
+                                    <div class="field_wrapper4"> 
+                                    </div>
+                                    <br>
+                                    <button class="button default btn btn-default add_button4">Add</button>
                                 </div>
 
                                 <h3 style="color: black; text-align: left; margin-top: 40px;">SOCIAL</h3>
@@ -186,6 +115,7 @@
                                     <input type="url" class="form-control" id="twitter" placeholder="Twitter Profile URL" name="twitter"/>
                                 </div>
                                 <button type="submit" class="button primary btn btn-primary">Submit</button>
+                                <button type="reset" style="background-color: red" class="button btn btn-primary">Reset</button>
                             </form>
                         </div>
                     </div>
