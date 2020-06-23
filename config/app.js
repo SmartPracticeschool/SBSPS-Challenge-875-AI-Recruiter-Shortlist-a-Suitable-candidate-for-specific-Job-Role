@@ -10,7 +10,7 @@ module.exports = {
   author: 'und3fined-v01d',
   version: '1.0.0',
   db: {
-    connectionUri: `mongodb://${dbHost}:27017/apply-by-api`,
+    connectionUri: `mongodb://${dbHost}:27017/apply-by-ai`,
     params: {},
     collections: ['moment', 'user', 'feeling', 'ask']
   }
