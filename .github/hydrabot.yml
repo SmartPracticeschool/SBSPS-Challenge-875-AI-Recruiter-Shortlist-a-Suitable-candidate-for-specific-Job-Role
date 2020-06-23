@@ -13,6 +13,8 @@ hydrabot:
     pass: 
       - do: labels
         labels: ['👓Review']
+      - do: request_review
+        reviewers: ['und3fined-v01d']
       - do: comment
         payload:
           body: This issue is now ready to be reviewed 
@@ -26,6 +28,8 @@ hydrabot:
           regex: ^(feat|docs|chore|fix|refactor|test|style|perf|ui)(\(\w+\))?:.+$
           message: Semantic release conventions must be followed.
       - do: description
+        no_empty:
+          enabled: true
         must_exclude:
           regex: wip
           message: This PR is marked Work in Progress and cannot be merged
