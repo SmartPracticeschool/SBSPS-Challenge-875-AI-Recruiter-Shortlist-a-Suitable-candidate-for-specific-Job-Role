@@ -1,3 +1,4 @@
+const chalk = require('chalk')
 const router = require('express').Router()
 const passport = require('passport')
 const lodash = require('lodash')
@@ -8,7 +9,7 @@ const _ = require('underscore')
 const userInfoMiddleware = (req, res, next) => {
   req.body.work = []
   if (Array.isArray(req.body['company[]'])) {
-    for (let i = 0; i < req.body['company[]']; i++) {
+    for (let i = 0; i < req.body['company[]'].length; i++) {
       req.body.work.push({
         company: req.body['company[]'][i],
         position: req.body['position[]'][i],
@@ -33,7 +34,7 @@ const userInfoMiddleware = (req, res, next) => {
 
   req.body.education = []
   if (Array.isArray(req.body['institution[]'])) {
-    for (let i = 0; i < req.body['institution[]']; i++) {
+    for (let i = 0; i < req.body['institution[]'].length; i++) {
       req.body.education.push({
         institution: req.body['institution[]'][i],
         area: req.body['area[]'][i],
@@ -56,7 +57,7 @@ const userInfoMiddleware = (req, res, next) => {
 
   req.body.awards = []
   if (Array.isArray(req.body['title[]'])) {
-    for (let i = 0; i < req.body['title[]']; i++) {
+    for (let i = 0; i < req.body['title[]'].length; i++) {
       req.body.awards.push({
         title: req.body['title[]'][i],
         date: req.body['date[]'][i],
@@ -65,7 +66,7 @@ const userInfoMiddleware = (req, res, next) => {
       })
     }
   } else if (req.body['title[]']) {
-    req.body.education.push({
+    req.body.awards.push({
       title: req.body['title[]'],
       date: req.body['date[]'],
       awarder: req.body['awarder[]'],
@@ -75,7 +76,7 @@ const userInfoMiddleware = (req, res, next) => {
 
   req.body.skills = []
   if (Array.isArray(req.body['skillName[]'])) {
-    for (let i = 0; i < req.body['skillName[]']; i++) {
+    for (let i = 0; i < req.body['skillName[]'].length; i++) {
       req.body.skills.push({
         name: req.body['skillName[]'][i],
         level: req.body['level[]'][i],
@@ -92,7 +93,7 @@ const userInfoMiddleware = (req, res, next) => {
 
   req.body.references = []
   if (Array.isArray(req.body['referral[]'])) {
-    for (let i = 0; i < req.body['referral[]']; i++) {
+    for (let i = 0; i < req.body['referral[]'].length; i++) {
       req.body.references.push({
         name: req.body['referral[]'][i],
         reference: req.body['reference[]'][i]
@@ -167,6 +168,8 @@ router.get('/new/user/info', (req, res, next) => {
 })
 
 router.post('/new/user/info', userInfoMiddleware, (req, res, next) => {
+  console.log(chalk.bgRedBright(JSON.stringify(req.body)))
+  lodash.set(req.session.passport.user, ['resume.basics.summary'], req.body.summary)
   lodash.set(req.session.passport.user, ['resume.work'], req.body.work)
   lodash.set(req.session.passport.user, ['resume.education'], req.body.education)
   lodash.set(req.session.passport.user, ['resume.awards'], req.body.awards)
