@@ -9,7 +9,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const { Company, User } = require('./models')
 
-const { IndexRouter } = require('./routes')
+const { AccountRouter, IndexRouter } = require('./routes')
 
 const app = express()
 
@@ -20,6 +20,8 @@ app.config = require('./config/app')
 // View engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
+require('./utils/passport/google')
 
 const cooky = {
   secret: 'work hard',
@@ -121,6 +123,7 @@ app.use(async (req, res, next) => {
 })
 
 app.use('/', IndexRouter)
+app.use('/account', AccountRouter)
 app.use(async (req, res, next) => {
   if (req.session.user) {
     let user
