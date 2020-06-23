@@ -16,10 +16,10 @@ const userInfoMiddleware = (req, res, next) => {
         startDate: req.body['startDate[]'][i],
         endDate: req.body['endDate[]'][i],
         summary: req.body['workSummary[]'][i],
-        highlights: _.map(req.body['highlights[]'][i].split(','), (keyword) => keyword.trim())
+        highlights: req.body['highlights[]'][i]
       })
     }
-  } else {
+  } else if (req.body['company[]']) {
     req.body.work.push({
       company: req.body['company[]'],
       position: req.body['position[]'],
@@ -43,7 +43,7 @@ const userInfoMiddleware = (req, res, next) => {
         gpa: req.body['gpa[]'][i]
       })
     }
-  } else {
+  } else if (req.body['institution[]']) {
     req.body.education.push({
       institution: req.body['institution[]'],
       area: req.body['area[]'],
@@ -64,7 +64,7 @@ const userInfoMiddleware = (req, res, next) => {
         summary: req.body['awardSummary[]'][i]
       })
     }
-  } else {
+  } else if (req.body['title[]']) {
     req.body.education.push({
       title: req.body['title[]'],
       date: req.body['date[]'],
@@ -82,7 +82,7 @@ const userInfoMiddleware = (req, res, next) => {
         keywords: _.map(req.body['keywords[]'][i].split(','), (keyword) => keyword.trim())
       })
     }
-  } else {
+  } else if (req.body['skillName[]']) {
     req.body.skills.push({
       name: req.body['skillName[]'],
       level: req.body['level[]'],
@@ -98,7 +98,7 @@ const userInfoMiddleware = (req, res, next) => {
         reference: req.body['reference[]'][i]
       })
     }
-  } else {
+  } else if (req.body['referral[]']) {
     req.body.references.push({
       name: req.body['referral[]'],
       reference: req.body['reference[]']
