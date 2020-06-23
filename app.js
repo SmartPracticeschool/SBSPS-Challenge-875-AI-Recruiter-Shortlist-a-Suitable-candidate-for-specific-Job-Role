@@ -21,6 +21,8 @@ app.config = require('./config/app')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+require('./utils/passport/google')
+
 const cooky = {
   secret: 'work hard',
   resave: true,
