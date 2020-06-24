@@ -181,7 +181,13 @@ router.post('/new/user/info', userInfoMiddleware, async (req, res, next) => {
       error
     })
   }
-  res.status(200).send(newUser)
+  req.session.user = newUser
+  res.redirect(
+    '/?logged-in=' + Math.random()
+      .toString()
+      .slice(2)
+      .slice(0, 5)
+  )
 })
 
 module.exports = router
