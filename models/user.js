@@ -72,21 +72,6 @@ const User = mongoose.Schema({
         "highlights": ["Started the company"]
        */
     },
-    volunteer: {
-      type: Array,
-      default: []
-      /*
-        "organization": "Organization",
-        "position": "Volunteer",
-        "website": "http://organization.com/",
-        "startDate": "2012-01-01",
-        "endDate": "2013-01-01",
-        "summary": "Description...",
-        "highlights": [
-          "Awarded 'Volunteer of the Month'"
-        ]
-      */
-    },
     education: {
       type: Array,
       default: []
@@ -112,17 +97,6 @@ const User = mongoose.Schema({
         "summary": "There is no spoon."
       */
     },
-    publications: {
-      type: Array,
-      default: []
-      /*
-        "name": "Publication",
-        "publisher": "Company",
-        "releaseDate": "2014-10-01",
-        "website": "http://publication.com",
-        "summary": "Description..."
-      */
-    },
     skills: {
       type: Array,
       default: []
@@ -135,6 +109,10 @@ const User = mongoose.Schema({
           "Javascript"
         ]
       */
+    },
+    references: {
+      type: Array,
+      default: []
     }
   },
   chats: [{

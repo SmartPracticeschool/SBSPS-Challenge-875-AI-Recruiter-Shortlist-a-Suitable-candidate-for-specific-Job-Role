@@ -9,7 +9,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const { Company, User } = require('./models')
 
-const { IndexRouter } = require('./routes')
+const { AccountRouter, ApiRouter, IndexRouter } = require('./routes')
 
 const app = express()
 
@@ -20,6 +20,8 @@ app.config = require('./config/app')
 // View engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
+require('./utils/passport/google')
 
 const cooky = {
   secret: 'work hard',
@@ -101,11 +103,12 @@ app.use(async (req, res, next) => {
   let user
   try {
     if (req.session.user.usertype === 'user') {
-      user = await User.findOne({ _id: req.session.user._id }).exec()
+      user = await User.findOne({ username: req.session.user.username }).exec()
     } else {
-      user = await Company.findOne({ _id: req.session.user._id }).exec()
+      user = await Company.findOne({ email: req.session.user.email }).exec()
     }
   } catch (error) {
+    console.log(error)
     return next()
   }
   if (!user) {
@@ -121,27 +124,30 @@ app.use(async (req, res, next) => {
 })
 
 app.use('/', IndexRouter)
+app.use('/account', AccountRouter)
 app.use(async (req, res, next) => {
   if (req.session.user) {
     let user
     try {
       if (req.session.user.usertype === 'user') {
-        user = await User.findOne({ _id: req.session.user._id }).exec()
+        user = await User.findOne({ username: req.session.user.username }).exec()
       } else {
-        user = await Company.findOne({ _id: req.session.user._id }).exec()
+        user = await Company.findOne({ email: req.session.user.email }).exec()
       }
     } catch (error) {
       next(new Error('Could not restore User from Session.'))
     }
     if (user) {
       req.session.user = user
+      return next()
     } else {
-      next(new Error('Could not restore User from Session.'))
+      return next(new Error('Could not restore User from Session.'))
     }
   } else {
     res.redirect('/')
   }
 })
+app.use('/api', ApiRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
