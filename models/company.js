@@ -13,6 +13,12 @@ const companySchema = mongoose.Schema({
     required: true,
     unique: true
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  logo: String,
   website: {
     type: String,
     validate: {
@@ -26,7 +32,6 @@ const companySchema = mongoose.Schema({
       validator: (v) => validator.isEmail(v)
     }
   },
-  avatar: String,
   size: Number,
   description: String,
   jobListings: [

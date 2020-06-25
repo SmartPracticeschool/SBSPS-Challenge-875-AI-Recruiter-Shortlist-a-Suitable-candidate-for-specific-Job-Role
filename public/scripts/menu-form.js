@@ -12,7 +12,7 @@ $(document).ready(function () {
         <a href="#" class="remove_field" style="text-decoration:none;">❌</a>
         <div>
           <label for="company">Company*</label>
-          <input type="text" class="form-control" placeholder="Company Name" name="company[]" required />
+          <input type="text" class="form-control" placeholder="Company Name" id="company" name="company[]" required />
         </div> 
         <br>
         <div class="form-group">
@@ -58,7 +58,7 @@ $(document).ready(function () {
         <a href="#" class="remove_field1" style="text-decoration:none">❌</a>
         <div>
           <label for="institution">Institution*</label>
-          <input type="text" class="form-control" placeholder="University/School Name" name="institution[]" required / >
+          <input type="text" class="form-control" placeholder="University/School Name" id="institution" name="institution[]" required / >
         </div>
         <br>
         <div class="form-group">

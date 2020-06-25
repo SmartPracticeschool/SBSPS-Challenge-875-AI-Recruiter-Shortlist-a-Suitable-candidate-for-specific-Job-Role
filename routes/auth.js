@@ -23,8 +23,8 @@ const userInfoMiddleware = (req, res, next) => {
       company: req.body['company[]'],
       position: req.body['position[]'],
       website: req.body['companyWebsite[]'],
-      startDate: req.body['startDate[]'],
-      endDate: req.body['endDate[]'] || 'present',
+      startDate: req.body['workStartDate[]'],
+      endDate: req.body['workEndDate[]'] || 'present',
       workSummary: req.body['workSummary[]']
     })
   }
@@ -173,6 +173,9 @@ router.post('/new/user/info', userInfoMiddleware, async (req, res, next) => {
   lodash.set(req.session.passport.user, ['resume.references'], req.body.references)
   lodash.set(req.session.passport.user, ['resume.basics.profiles'], req.body.profiles)
   lodash.set(req.session.passport.user, ['resume.basics.location'], req.body.location)
+  lodash.set(req.session.passport.user, ['resume.basics.label'], req.body.expertise)
+  lodash.set(req.session.passport.user, ['resume.basics.website'], req.body.website)
+  lodash.set(req.session.passport.user, ['resume.basics.phone'], req.body.phone)
   const newUser = new User(req.session.passport.user)
   try {
     await newUser.save()
@@ -188,6 +191,12 @@ router.post('/new/user/info', userInfoMiddleware, async (req, res, next) => {
       .slice(2)
       .slice(0, 5)
   )
+})
+
+router.get('/out', (req, res, next) => {
+  req.session.destroy(() => {
+    res.redirect('/?action=logout')
+  })
 })
 
 module.exports = router
