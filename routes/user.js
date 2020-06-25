@@ -50,6 +50,22 @@ router.get('/user/@:username', async (req, res, next) => {
   })
 })
 
+router.get('/user/@:username/resume', async (req, res, next) => {
+  let user
+  try {
+    user = await User.findOne({ username: req.params.username }).exec()
+  } catch (error) {
+    return res.status(404).render('error', {
+      error: new Error('No user found with that username!')
+    })
+  }
+
+  res.render('user/resume', {
+    title: `Resume | ${user.username}`,
+    user
+  })
+})
+
 router.get('/company/@:username', async (req, res, next) => {
   let company
   try {

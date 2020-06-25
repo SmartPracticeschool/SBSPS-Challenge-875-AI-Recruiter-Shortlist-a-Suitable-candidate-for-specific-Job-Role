@@ -47,16 +47,23 @@
                                             </a>
                                         </div>
                                     <% } %>
-                                    <div class="col-md-6">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" title="Reach out via Email">
                                         <a type="button" style="margin-top:5px" href="mailto:<%= user.resume.basics.email %>" class="btn btn-primary btn-sm">
                                             Email
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6" title="Know about user skills">
+                                        <a type="button" style="margin-top:5px" href="/users/user/@<%= user.username %>/resume/" class="btn btn-primary btn-sm">
+                                            Resume
                                         </a>
                                     </div>
                                 </div>
                                 <div class="profile-usermenu">
                                     <ul class="nav">
                                         <li name="posts" class="tab active">
-                                            <a href="#" style="background-color: transparent;">
+                                            <a href="#" title="Recent posts">
                                                 <i class="fa fa-newspaper"></i>
                                                     Posts
                                                 </a>
