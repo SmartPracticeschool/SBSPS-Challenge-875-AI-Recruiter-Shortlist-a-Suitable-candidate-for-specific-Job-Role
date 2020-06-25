@@ -35,7 +35,7 @@ const User = mongoose.Schema({
       website: {
         type: String,
         validate: {
-          validator: (v) => validator.isUrl(v)
+          validator: (v) => validator.isURL(v)
         }
       },
       summary: {
