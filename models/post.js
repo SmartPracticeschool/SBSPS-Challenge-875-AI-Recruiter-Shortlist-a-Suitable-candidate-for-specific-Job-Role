@@ -1,4 +1,4 @@
-const { db: { connectionUri }} = require('../config/app')
+const { db: { connectionUri } } = require('../config/app')
 const mongoose = require('mongoose')
 
 mongoose.connect(connectionUri, {

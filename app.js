@@ -9,7 +9,13 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const { Company, User } = require('./models')
 
-const { AccountRouter, ApiRouter, IndexRouter } = require('./routes')
+const {
+  AccountRouter,
+  ApiRouter,
+  PostRouter,
+  IndexRouter,
+  UserRouter
+} = require('./routes')
 
 const app = express()
 
@@ -124,7 +130,7 @@ app.use(async (req, res, next) => {
 })
 
 app.use('/', IndexRouter)
-app.use('/account', AccountRouter)
+app.use('/account/', AccountRouter)
 app.use(async (req, res, next) => {
   if (req.session.user) {
     let user
@@ -147,7 +153,9 @@ app.use(async (req, res, next) => {
     res.redirect('/')
   }
 })
-app.use('/api', ApiRouter)
+app.use('/users/', UserRouter)
+app.use('/post/', PostRouter)
+app.use('/api/', ApiRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
