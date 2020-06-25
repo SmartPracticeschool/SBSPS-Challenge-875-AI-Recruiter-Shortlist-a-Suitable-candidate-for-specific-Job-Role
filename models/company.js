@@ -16,7 +16,6 @@ const companySchema = mongoose.Schema({
   website: {
     type: String,
     validate: {
-      
       validator: (v) => validator.isUrl(v)
     }
   },
