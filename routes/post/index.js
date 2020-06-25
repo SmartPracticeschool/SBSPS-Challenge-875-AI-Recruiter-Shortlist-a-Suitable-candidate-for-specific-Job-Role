@@ -47,20 +47,19 @@ router.post('/upload', formParser, async (req, res, next) => {
     category: req.body.type,
     type: mimetype,
     createdAt: new Date(),
-    onModel: (req.session.user.usertype === 'user' ? 'User' : 'Company')
+    onModel: req.session.user.usertype === 'user' ? 'User' : 'Company'
   })
 
   try {
     await newPost.save()
   } catch (error) {
-    res.status(500).render('error', {
+    return res.status(500).render('error', {
       error: new Error('Failed to save post. Please try again!')
     })
   }
   console.log(bgBlueBright('Post saved successfully'))
   res.redirect('/')
-}
-)
+})
 
 router.get('/delete/:id', async (req, res, next) => {
   try {
