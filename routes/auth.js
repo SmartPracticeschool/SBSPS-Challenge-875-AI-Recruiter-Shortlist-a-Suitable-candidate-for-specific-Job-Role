@@ -173,6 +173,7 @@ router.post('/new/user/info', userInfoMiddleware, async (req, res, next) => {
   lodash.set(req.session.passport.user, ['resume.references'], req.body.references)
   lodash.set(req.session.passport.user, ['resume.basics.profiles'], req.body.profiles)
   lodash.set(req.session.passport.user, ['resume.basics.location'], req.body.location)
+  lodash.set(req.session.passport.user, ['resume.basics.label'], req.body.expertise)
   const newUser = new User(req.session.passport.user)
   try {
     await newUser.save()
