@@ -190,4 +190,10 @@ router.post('/new/user/info', userInfoMiddleware, async (req, res, next) => {
   )
 })
 
+router.get('/out', (req, res, next) => {
+  req.session.destroy(() => {
+    res.redirect('/?action=logout')
+  })
+})
+
 module.exports = router

@@ -28,7 +28,6 @@
 
 .time {
   float: right;
-
   padding-top: 10px;
 
   color: #999;
@@ -97,5 +96,5 @@ hr {
 .comments-input {
   border: none;
   margin-left: 10px;
-  width: 100%;
+  width: 75%;
 }
