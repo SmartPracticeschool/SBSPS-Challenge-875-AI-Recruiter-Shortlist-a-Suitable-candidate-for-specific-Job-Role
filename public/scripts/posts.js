@@ -30,16 +30,10 @@
     function gramCardHeader(post) {
       return `
       <div class="gram-card-header">
-        <img class="gram-card-user-image lozad" src="${post.author.usertype == 'user' ? post.author.resume.basic.picture : post.author.logo}">
-        <a class="gram-card-user-name" href="/u/@${post.author.username}">${post.author.username}</a>
+        <img class="gram-card-user-image lozad" src="${post.author.usertype == 'user' ? post.author.resume.basics.picture : post.author.logo}">
+        <a class="gram-card-user-name" href="/users/${post.author.usertype}/@${post.author.username}">${post.author.username}</a>
         <div class="dropdown gram-card-time">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 
-            <i class="glyphicon glyphicon-option-vertical"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right">
-          ${post.staticUrl ? '<li><a href="' + post.staticUrl + '"><i class="fa fa-share"></i> View</a></li>' : ''}
-          ${post.author.username == username ? '<li><a href="/me/post/delete/' + post._id +  '"><i class="fa fa-trash"></i> Delete</a></li>' : ''}
-          <ul>
+        ${post.author.username == username ? '<a style="margin-left: 10px" title="Delete" href="/post/delete/' + post._id +  '">🗑</a>' : ''}
         </div>
         <div class="time">${post.timeago}</div>
       </div>
@@ -59,12 +53,14 @@
         `)
       } else if(post.staticUrl) {
         return (`
-        <div class="gram-card-image>
+        <div class="gram-card-image">
           <center>
             <video author="${post.author.username}" src="${post.staticUrl}" id="${post._id}" class="post img-responsive" controls></video>
           </center>
         </div>
         `)
+      } else {
+        return ``
       }
     }
 
@@ -72,7 +68,7 @@
       return `
       <div class="gram-card-content">
         <p>
-          <a class="gram-card-content-user" href="/u/@${post.author.username}">${post.author.username}
+          <a class="gram-card-content-user" href="/users/${post.author.usertype}/@${post.author.username}">${post.author.username}
           </a>
           ${post.caption}
           <span class="label label-info">${post.category ? post.category : "Unknown"}</span>
@@ -81,7 +77,7 @@
         <p class="comments">${post.comments.length} comment(s).</p>
         <br>
         <div class="comments-div" id="comments-${post._id}">
-          ${post.comments.map(c => '<a class="user-comment" href="/u/@' + c.by + '">@' + c.by + '</a>' + c.text + '<br>' ).join('')}
+          ${post.comments.map(c => '<a class="user-comment" href="/users/' + c.by.usertype + '@' + c.by.username + '">@' + c.by.username + '</a>' + c.text + '<br>' ).join('')}
         </div>
         <hr>
       </div>
@@ -98,6 +94,8 @@
           author="${post.author.username}"
           id="${post._id}-like"
         >
+        👍${post.likes.length}
+        </button>
         <input id="${post._id}" class="comments-input comment-input-box" author="${post.author.username}" type="text" id="comment" placeholder="Click enter to comment here..."/>
       </div>
       `
@@ -136,7 +134,7 @@
 
         posts.forEach((eachPost) => {
           $('#posts')[method](
-            `div class="gram-card` +
+            `<div class="gram-card">` +
             gramCardHeader(eachPost) + 
             '<br><br>' + 
             gramCardImage(eachPost) + 
@@ -207,8 +205,8 @@
                   }
                 })
                 .done(function(data) {
-                  $('#comments-' + el.id).append(`<a class="user-comment" href="/u/@${data.by}">
-                  @${data.by}
+                  $('#comments-' + el.id).append(`<a class="user-comment" href="/users/${data.by.usertype}/@${data.by.username}">
+                  @${data.by.username}
                   </a> ${el.value}<br>`);
                   el.value = ''
                   show_notification('Comment added!', 'success')
