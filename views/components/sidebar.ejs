@@ -26,12 +26,20 @@
           <a href="/me/activity">activity</a>
         </li> -->
         <li class="list-group-item">
+          <i class="fa fa-user"></i>&nbsp;
+          <a title="Your user profile" href="/users/<%= user.usertype %>/@<%= user.username %>" id="profile">Profile</a>
+        </li>
+        <li class="list-group-item">
+          <i class="fa fa-moon"></i>&nbsp;
+          <a title="Toggle light/dark mode" href="#" id="darkmode">Light/Dark</a>
+        </li>
+        <li class="list-group-item">
           <i class="fa fa-search"></i>&nbsp;
-          <a href="/users/">search</a>
+          <a title="Search for users/companies" href="/users/">Search</a>
         </li>
         <li class="list-group-item">
           <i class="fa fa-plus"></i>&nbsp;
-          <a href="/post/upload/">upload</a>
+          <a title="Share your thoughts" href="/post/upload/">Post</a>
         </li>
       </ul>
       <!-- <ul class="list-group">
@@ -55,7 +63,7 @@
         </li>
         <li class="list-group-item">
           <i class="fa fa-power-off"></i>&nbsp;
-          <a href="/account/out/">log out</a>
+          <a title="Exit" href="/account/out/">Sign out</a>
         </li>
       </ul>
     </div>
