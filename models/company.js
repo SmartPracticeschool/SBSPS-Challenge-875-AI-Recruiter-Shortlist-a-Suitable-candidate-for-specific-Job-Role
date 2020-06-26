@@ -11,12 +11,12 @@ const companySchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: [true, 'Company with this name already exists']
+    unique: true
   },
   username: {
     type: String,
     required: true,
-    unique: [true, 'Company with this name already exists']
+    unique: true
   },
   logo: String,
   website: {
