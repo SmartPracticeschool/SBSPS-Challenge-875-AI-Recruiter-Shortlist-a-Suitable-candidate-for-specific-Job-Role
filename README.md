@@ -8,7 +8,7 @@
     Let AI handle it for you.
     <br/>
     <br/>
-    Our customers spend around 50% less time screening candidates.
+    Our users spend around 50% less time screening candidates.
     Instant and automated. The no-review pre-screen.
     <br />
     <br />
