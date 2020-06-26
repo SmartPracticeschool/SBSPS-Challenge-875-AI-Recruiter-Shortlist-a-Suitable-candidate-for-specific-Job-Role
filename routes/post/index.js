@@ -5,7 +5,7 @@ const mime = require('mime-types')
 const router = require('express').Router()
 const { v4 } = require('uuid')
 const formParser = require('../../utils/parsers/form-parser')
-const { Post } = require('../../models')
+const { Post, Job } = require('../../models')
 
 const validFileTypes = ['png', 'jpeg', 'gif', 'jpg', 'mov', 'mp4']
 
@@ -69,6 +69,37 @@ router.get('/delete/:id', async (req, res, next) => {
     })
   }
 
+  res.redirect('/')
+})
+
+
+router.get('/job', (req, res, next) => {
+  res.render('post/job', {
+    title: req.app.config.name,
+    user: req.session.user
+  })
+})
+
+router.post('/job', async(req, res, next) => {
+  res.render('post/job')
+  const job = new Job({
+    
+    role: req.body.role,
+    experience: req.body.experience,
+    skills: req.body.skills[],
+    personality: req.body.personality[],
+    description: req.body.description,
+    pay: req.body.pay
+  })
+
+  try {
+    await newPost.save()
+  } catch (error) {
+    return res.status(500).render('error', {
+      error: new Error('Failed to upload job. Please try again!')
+    })
+  }
+  console.log(bgBlueBright('Job uploaded successfully'))
   res.redirect('/')
 })
 
