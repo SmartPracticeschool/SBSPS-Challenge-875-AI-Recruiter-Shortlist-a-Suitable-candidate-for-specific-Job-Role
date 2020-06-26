@@ -10,7 +10,6 @@ const { Post } = require('../../models')
 const validFileTypes = ['png', 'jpeg', 'gif', 'jpg', 'mov', 'mp4']
 
 router.get('/upload', (req, res, next) => {
-  console.log(req.session.user)
   res.render('post/upload', {
     title: req.app.config.name,
     user: req.session.user

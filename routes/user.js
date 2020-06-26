@@ -28,9 +28,9 @@ router.get('/', async (req, res, next) => {
 router.get('/user/@:username', async (req, res, next) => {
   let user
   try {
-    user = await (await User.findOne({ username: req.params.username }).populate({ path: 'posts', options: { lean: true } }).populate('followers')).execPopulate()
+    user = await (await User.findOne({ username: req.params.username }).populate('followers').populate({ path: 'posts', options: { lean: true } })).execPopulate()
   } catch (error) {
-    res.status(500).send({ message: 'Database error!' })
+    return res.status(500).send({ message: 'Database error!' })
   }
 
   user.posts.forEach(post => {
