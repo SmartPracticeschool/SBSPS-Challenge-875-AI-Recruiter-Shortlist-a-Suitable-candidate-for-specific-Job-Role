@@ -11,18 +11,18 @@ const companySchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: [true, 'Company with this name already exists']
   },
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: [true, 'Company with this name already exists']
   },
   logo: String,
   website: {
     type: String,
     validate: {
-      validator: (v) => validator.isUrl(v)
+      validator: (v) => validator.isURL(v)
     }
   },
   email: {
@@ -52,10 +52,17 @@ const companySchema = mongoose.Schema({
     type: String,
     default: 'company'
   },
-  post: [{
+  posts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
-  }]
+  }],
+  location: {
+    address: String,
+    countryCode: String,
+    postalCode: Number,
+    area: String,
+    city: String
+  }
 })
 
 module.exports = mongoose.model('Company', companySchema)

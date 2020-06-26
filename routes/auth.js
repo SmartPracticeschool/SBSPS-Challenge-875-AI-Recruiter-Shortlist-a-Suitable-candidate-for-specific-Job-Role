@@ -1,9 +1,14 @@
+/* eslint-disable no-useless-escape */
+const path = require('path')
+const mv = require('mv')
+const { v4 } = require('uuid')
 const router = require('express').Router()
 const passport = require('passport')
 const lodash = require('lodash')
-const { User } = require('../models')
 const querystring = require('querystring')
 const _ = require('underscore')
+const { User, Company } = require('../models')
+const formParser = require('../utils/parsers/form-parser')
 
 const userInfoMiddleware = (req, res, next) => {
   req.body.work = []
@@ -197,6 +202,72 @@ router.get('/out', (req, res, next) => {
   req.session.destroy(() => {
     res.redirect('/?action=logout')
   })
+})
+
+router.get('/new/company/info', (req, res, next) => {
+  res.render('auth/forms/company', {
+    title: req.app.config.name,
+    error: false
+  })
+})
+
+router.post('/new/company/info', formParser, async (req, res, next) => {
+  const randomId = v4()
+  const oldpath = req.files.logo.path
+  const username = req.body.name
+    .replace(/(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g, '')
+    .replace(/\s/g, '-')
+    .toLowerCase()
+
+  const type = req.files.logo.name.split('.').slice(-1)[0].toLowerCase()
+  if (!['png', 'jpg', 'jpeg'].includes(type)) {
+    return res.status(400).render('auth/forms/company', {
+      error: 'Unsupported file format'
+    })
+  }
+
+  const newpath = path.join(__dirname, '..', 'public', 'company', `${username}_${randomId}_${req.files.logo.name}`)
+  const finalLocation = `/company/${username}_${randomId}_${req.files.logo.name}`
+
+  mv(oldpath, newpath, (error) => {
+    if (error) {
+      console.log(error)
+    }
+  })
+
+  const company = new Company({
+    name: req.body.name,
+    username,
+    email: req.body.email,
+    logo: finalLocation,
+    website: req.body.website,
+    size: req.body.size,
+    description: req.body.description,
+    usertype: 'company',
+    location: {
+      address: req.body.address,
+      area: req.body.region,
+      city: req.body.city,
+      countryCode: req.body.countryCode,
+      postalCode: req.body.postalCode
+    }
+  })
+
+  try {
+    await company.save()
+  } catch (error) {
+    return res.status(500).send('auth/forms/company', {
+      error: (error.name === 'MongoError' && error.code === 11000) ? 'Account for this company already exists' : error
+    })
+  }
+
+  req.session.user = company
+  res.redirect(
+    '/?logged-in=' + Math.random()
+      .toString()
+      .slice(2)
+      .slice(0, 5)
+  )
 })
 
 module.exports = router
