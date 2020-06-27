@@ -222,7 +222,3 @@ $(document).ready(function () {
   })
 
 })
-
-
-
-
