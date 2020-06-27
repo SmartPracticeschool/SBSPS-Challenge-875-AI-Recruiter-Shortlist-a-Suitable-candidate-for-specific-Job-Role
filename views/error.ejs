@@ -29,7 +29,7 @@
     <%- include('components/navbar') -%>
     <div class="container" id="mainPage" style="margin-top: 10%;">
       <h1>Error!</h1>
-      <h2><%= (error.message || message) %></h2>
+      <small><%= (error.message || message) %></small>
       <%= error.status %>
       <br />
       <br />

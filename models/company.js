@@ -22,7 +22,7 @@ const companySchema = mongoose.Schema({
   website: {
     type: String,
     validate: {
-      validator: (v) => validator.isUrl(v)
+      validator: (v) => validator.isURL(v)
     }
   },
   email: {
@@ -52,10 +52,17 @@ const companySchema = mongoose.Schema({
     type: String,
     default: 'company'
   },
-  post: [{
+  posts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post'
-  }]
+  }],
+  location: {
+    address: String,
+    countryCode: String,
+    postalCode: Number,
+    area: String,
+    city: String
+  }
 })
 
 module.exports = mongoose.model('Company', companySchema)

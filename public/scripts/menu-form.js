@@ -12,7 +12,7 @@ $(document).ready(function () {
         <a href="#" class="remove_field" style="text-decoration:none;">❌</a>
         <div>
           <label for="company">Company*</label>
-          <input type="text" class="form-control" placeholder="Company Name" name="company[]" required />
+          <input type="text" class="form-control" placeholder="Company Name" id="company" name="company[]" required />
         </div> 
         <br>
         <div class="form-group">
@@ -58,7 +58,7 @@ $(document).ready(function () {
         <a href="#" class="remove_field1" style="text-decoration:none">❌</a>
         <div>
           <label for="institution">Institution*</label>
-          <input type="text" class="form-control" placeholder="University/School Name" name="institution[]" required / >
+          <input type="text" class="form-control" placeholder="University/School Name" id="institution" name="institution[]" required / >
         </div>
         <br>
         <div class="form-group">
@@ -193,4 +193,70 @@ $(document).ready(function () {
     e.preventDefault()
     $(this).parent('div').remove() //Remove field html
   })
+
+
+
+  var addButton5 = $('.add_button5') //Add button selector
+  var wrapper5 = $('.field_wrapper5') //Input field wrapper
+
+  //Once add button is clicked
+  $(addButton5).click(function (e) {
+    //Check maximum number of input fields
+    e.preventDefault()
+    $(wrapper5).append(
+      `
+      <div>
+        <a href="#" class="remove_field5" style="text-decoration: none">❌</a>
+        <div>
+          <label for="skill">Enter Skill Required*</label>
+          <input type="text" class="form-control" id="skills" name="skills[]" required />
+          <br>
+        </div> 
+      </div>
+      `
+    )
+  })
+
+  //Once remove button is clicked
+  $(wrapper5).on('click', '.remove_field5', function (e) {
+    e.preventDefault()
+    $(this).parent('div').remove() //Remove field html
+  })
+
+
+
+
+
+
+  var addButton6 = $('.add_button6') //Add button selector
+  var wrapper6 = $('.field_wrapper6') //Input field wrapper
+
+  //Once add button is clicked
+  $(addButton6).click(function (e) {
+    //Check maximum number of input fields
+    e.preventDefault()
+    $(wrapper6).append(
+      `
+      <div>
+        <a href="#" class="remove_field6" style="text-decoration: none">❌</a>
+        <div>
+          <label for="personality">Enter Personality Trait*</label>
+          <input type="text" class="form-control" id="personality" name="personality[]" required />
+          <br>
+        </div> 
+      </div>
+      `
+    )
+  })
+
+  //Once remove button is clicked
+  $(wrapper6).on('click', '.remove_field6', function (e) {
+    e.preventDefault()
+    $(this).parent('div').remove() //Remove field html
+  })
+
 })
+
+
+
+
