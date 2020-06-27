@@ -12,29 +12,29 @@
                         <div class="profile-sidebar">
                             <div class="profile-userpic">
                                 <center>
-                                    <img src="<%= user.resume.basics.picture %>" class="img-responsive" alt="">
+                                    <img src="<%= searchUser.resume.basics.picture %>" class="img-responsive" style="width: 150px; height: 150px" alt="">
                                 </center>
                             </div>
                             <div class="profile-usertitle">
                                 <div class="profile-usertitle-name">
-                                    <%= user.resume.basics.name %> 
+                                    <%= searchUser.resume.basics.name %> 
                                     <br>
-                                    <small style="color: orange;">@<%= user.username %></small>
+                                    <small style="color: orange;">@<%= searchUser.username %></small>
                                     <br>
                                 </div>
                                 <div class="profile-usertitle-job">
-                                    <%= user.resume.basics.label %>
+                                    <%= searchUser.resume.basics.label %>
                                 </div>
                                 <div class="profile-user-desc">
-                                    <i><%= user.resume.basics.summary %></i>
+                                    <i><%= searchUser.resume.basics.summary %></i>
                                 </div>
                             </div>
                             <div class="profile-userbuttons">
                                 <div class="row">
-                                    <% if(user.usertype != currentUser.usertype || user.username != currentUser.username) { %>
+                                    <% if(searchUser.usertype != user.usertype || searchUser.username != user.username) { %>
                                         <div class="col-md-6">
-                                            <button type="button" id="follow-btn" data-follow="<%= user %>" style="margin-top:5px" class="btn btn-danger btn-sm">
-                                                <% if(user.followers && user.followers.find(x => x.usertype == currentUser.usertype && x._id == currentUser._id)) { %>
+                                            <button type="button" id="follow-btn" data-follow="<%= searchUser %>" style="margin-top:5px" class="btn btn-danger btn-sm">
+                                                <% if(searchUser.followers && searchUser.followers.find(x => x.usertype == user.usertype && x._id == user._id)) { %>
                                                     Unfollow
                                                 <% } else { %>
                                                     Follow
@@ -42,7 +42,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-6">
-                                            <a type="button" href="/chat/user/<%= user._id %>" style="margin-top:5px" class="btn btn-success btn-sm">
+                                            <a type="button" href="/chat/user/<%= searchUser._id %>" style="margin-top:5px" class="btn btn-success btn-sm">
                                                 Message
                                             </a>
                                         </div>
@@ -50,12 +50,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6" title="Reach out via Email">
-                                        <a type="button" style="margin-top:5px" href="mailto:<%= user.resume.basics.email %>" class="btn btn-primary btn-sm">
+                                        <a type="button" style="margin-top:5px" href="mailto:<%= searchUser.resume.basics.email %>" class="btn btn-primary btn-sm">
                                             Email
                                         </a>
                                     </div>
                                     <div class="col-md-6" title="Know about user skills">
-                                        <a type="button" style="margin-top:5px" href="/users/user/@<%= user.username %>/resume/" class="btn btn-warning btn-sm">
+                                        <a type="button" style="margin-top:5px" href="/users/user/@<%= searchUser.username %>/resume/" class="btn btn-warning btn-sm">
                                             Resume
                                         </a>
                                     </div>
@@ -78,7 +78,7 @@
                             <h2>Posts</h2>
                             <br>
                             <div class="row">
-                                <% for(let post of user.posts) { %>
+                                <% for(let post of searchUser.posts) { %>
                                     <div class="col-md-6">
                                         <div class="gram-card">
                                             <div class="gram-card-header">
@@ -113,7 +113,7 @@
             </div>
         </div>
         <div id="notify_message" class="notify_message-success">
-            <center>Follow @<%= user.username %>!</center>
+            <center>Follow @<%= searchUser.username %>!</center>
         </div>
         <%- include('../components/tabs') -%>
         <%- include('../components/footer') -%>
