@@ -62,7 +62,11 @@ const companySchema = mongoose.Schema({
     postalCode: Number,
     area: String,
     city: String
-  }
+  },
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 })
 
 module.exports = mongoose.model('Company', companySchema)

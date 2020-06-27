@@ -6,6 +6,17 @@ mongoose.connect(connectionUri, {
   useUnifiedTopology: true
 })
 
+const applicationSchema = mongoose.Schema({
+  by: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  selected: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const jobSchema = mongoose.Schema({
   company: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,8 +42,11 @@ const jobSchema = mongoose.Schema({
   },
   applications: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'Application'
   }]
 })
 
-module.exports = mongoose.model('Job', jobSchema)
+module.exports = {
+  Application: mongoose.model('Application', applicationSchema),
+  Job: mongoose.model('Job', jobSchema)
+}

@@ -139,7 +139,7 @@ const User = mongoose.Schema({
   }],
   followers: {
     type: mongoose.Schema.Types.ObjectId,
-    refPath: 'onModel'
+    ref: 'User'
   },
   notifications: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -156,10 +156,6 @@ const User = mongoose.Schema({
   usertype: {
     type: String,
     default: 'user'
-  },
-  onModel: {
-    type: String,
-    enum: ['Company', 'User']
   }
 })
 
