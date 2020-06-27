@@ -72,7 +72,6 @@ router.get('/delete/:id', async (req, res, next) => {
   res.redirect('/')
 })
 
-
 router.get('/job', (req, res, next) => {
   res.render('post/job', {
     title: req.app.config.name,
@@ -80,20 +79,17 @@ router.get('/job', (req, res, next) => {
   })
 })
 
-router.post('/job', async(req, res, next) => {
-  res.render('post/job')
-  const job = new Job({
-    
+router.post('/job', async (req, res, next) => {
+  const newJob = new Job({
     role: req.body.role,
     experience: req.body.experience,
-    skills: req.body.skills[],
-    personality: req.body.personality[],
+    skills: req.body['skills[]'],
     description: req.body.description,
     pay: req.body.pay
   })
 
   try {
-    await newPost.save()
+    await newJob.save()
   } catch (error) {
     return res.status(500).render('error', {
       error: new Error('Failed to upload job. Please try again!')

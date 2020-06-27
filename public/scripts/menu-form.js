@@ -194,8 +194,6 @@ $(document).ready(function () {
     $(this).parent('div').remove() //Remove field html
   })
 
-
-
   var addButton5 = $('.add_button5') //Add button selector
   var wrapper5 = $('.field_wrapper5') //Input field wrapper
 
@@ -219,38 +217,6 @@ $(document).ready(function () {
 
   //Once remove button is clicked
   $(wrapper5).on('click', '.remove_field5', function (e) {
-    e.preventDefault()
-    $(this).parent('div').remove() //Remove field html
-  })
-
-
-
-
-
-
-  var addButton6 = $('.add_button6') //Add button selector
-  var wrapper6 = $('.field_wrapper6') //Input field wrapper
-
-  //Once add button is clicked
-  $(addButton6).click(function (e) {
-    //Check maximum number of input fields
-    e.preventDefault()
-    $(wrapper6).append(
-      `
-      <div>
-        <a href="#" class="remove_field6" style="text-decoration: none">❌</a>
-        <div>
-          <label for="personality">Enter Personality Trait*</label>
-          <input type="text" class="form-control" id="personality" name="personality[]" required />
-          <br>
-        </div> 
-      </div>
-      `
-    )
-  })
-
-  //Once remove button is clicked
-  $(wrapper6).on('click', '.remove_field6', function (e) {
     e.preventDefault()
     $(this).parent('div').remove() //Remove field html
   })

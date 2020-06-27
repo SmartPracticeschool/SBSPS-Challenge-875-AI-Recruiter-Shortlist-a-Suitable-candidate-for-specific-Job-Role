@@ -23,10 +23,6 @@ const jobSchema = mongoose.Schema({
     type: Array,
     default: []
   },
-  personality:{
-    type: Array,
-    default: []
-  },
   description: String,
   pay: Number,
   hiring: {
