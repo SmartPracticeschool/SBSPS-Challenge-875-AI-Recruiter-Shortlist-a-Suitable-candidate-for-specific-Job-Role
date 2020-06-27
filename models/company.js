@@ -13,6 +13,7 @@ const companySchema = mongoose.Schema({
     required: true,
     unique: true
   },
+  password: String,
   username: {
     type: String,
     required: true,
