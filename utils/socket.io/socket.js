@@ -74,6 +74,7 @@ const sendMsg = async (socket, chat) => {
     msg: `@${socket.session.user.username} sent you a message: ${chat.txt.substring(0, 15)}`,
     time: new Date(),
     for: receiver._id,
+    link: `/chat/${socket.session.user.usertype}/${socket.session.user._id}`,
     onModel: receiver.usertype === 'user' ? 'User' : 'Company'
   })
 

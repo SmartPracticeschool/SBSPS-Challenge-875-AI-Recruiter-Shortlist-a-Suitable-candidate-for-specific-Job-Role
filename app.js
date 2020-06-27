@@ -14,6 +14,7 @@ const {
   ApiRouter,
   ChatRouter,
   PostRouter,
+  NotificationRouter,
   IndexRouter,
   UserRouter
 } = require('./routes')
@@ -155,6 +156,7 @@ app.use(async (req, res, next) => {
   }
 })
 app.use('/users/', UserRouter)
+app.use('/notifications/', NotificationRouter)
 app.use('/post/', PostRouter)
 app.use('/chat', ChatRouter)
 app.use('/api/', ApiRouter)
