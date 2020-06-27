@@ -21,14 +21,15 @@
           <ul class="actions special stacked">
             <li>
               <a href="/account/google/" id="loginButton" class="button primary large">
-                <span class="icon solid brands fa-github"></span>
-                Login with Google
+                <span class="icon solid brands fa-google"></span>
+                User
               </a>
             </li>
             <li>
-              <a href="#one"
-                ><span class="icon solid major fa-angle-down"></span
-              ></a>
+              <a href="/account/company/login/" id="loginButton" class="button primary large">
+                <i class="fa fa-building"></i>
+                Org
+              </a>
             </li>
           </ul>
         </div>
@@ -99,6 +100,7 @@
       </section>
     </div>
     <div id="notify_message" class="notify_message-success"></div>
+    <%- include('components/footer') -%>
   </body>
 
   <script src="scripts/vendor/breakpoints.min.js"></script>

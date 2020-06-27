@@ -25,7 +25,7 @@ passport.use(
   async (accessToken, refreshToken, profile, done) => {
     let dbUser
     try {
-      dbUser = await User.findOne({ email: profile.email }).exec()
+      dbUser = await User.findOne({ 'resume.basics.email': profile.email }).exec()
     } catch (error) {
       console.log(chalk.red('Error: ', error))
     }

@@ -13,7 +13,7 @@
             <li>
               <div class="container">
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-8 col-sm-12 col-xs-12" style="margin:auto">
                     <form action="/account/new/company/info" method="POST" enctype="multipart/form-data">
                       <h3 style="color: black; text-align: left;">GENERAL</h3>
                       <div class="form-group">
@@ -21,12 +21,20 @@
                         <input type="name" class="form-control" id="name" placeholder="Enter the company name" name="name" />
                       </div>
                       <div class="form-group">
-                        <label for="website">Website*</label>
-                        <input type="url" class="form-control" id="website" placeholder="Enter the company website" name="website" />
-                      </div>
-                      <div class="form-group">
                         <label for="website">Email*</label>
                         <input type="email" class="form-control" id="email" placeholder="Enter the company email" name="email" />
+                      </div>
+                      <div class="form-group">
+                        <label for="password">Password*</label>
+                        <input type="password" pattern=".{8,}" class="form-control" id="password" placeholder="Enter password" name="password" />
+                      </div>
+                      <div class="form-group">
+                        <label for="password2">Confirm Password*</label>
+                        <input type="password" pattern=".{8,}" class="form-control" id="password2" placeholder="Re-enter your password" name="password2" />
+                      </div>
+                      <div class="form-group">
+                        <label for="website">Website*</label>
+                        <input type="url" class="form-control" id="website" placeholder="Enter the company website" name="website" />
                       </div>
                       <div class="form-group">
                         <label for="website">Avatar*</label>
@@ -71,12 +79,21 @@
                           <input type="text" name="region" class="form-control" id="region" placeholder="Region (eg. CA)" required />
                         </div>
                       </div>
+                      <br>
                       <button type="submit" class="button primary btn btn-primary">
                         Submit
                       </button>
                       <button type="reset" style="background-color: red;" class="button btn btn-warning">
                         Reset
                       </button>
+                      <hr>
+                      <p>
+                        Already have an account?
+                        <br>
+                        <a href="/account/company/login">
+                          Login
+                        </a> instead
+                      </p>
                     </form>
                   </div>
                 </div>
@@ -108,6 +125,7 @@
           reader.readAsDataURL(input.files[0])
       }
     }
+    $('#header > a:last-child').hide()
   </script>
   <script src="/scripts/vendor/breakpoints.min.js"></script>
   <script src="/scripts/vendor/browser.min.js"></script>

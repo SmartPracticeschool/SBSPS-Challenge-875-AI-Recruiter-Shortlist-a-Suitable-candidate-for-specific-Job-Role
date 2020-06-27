@@ -12,7 +12,9 @@ const { Company, User } = require('./models')
 const {
   AccountRouter,
   ApiRouter,
+  ChatRouter,
   PostRouter,
+  NotificationRouter,
   IndexRouter,
   UserRouter
 } = require('./routes')
@@ -109,9 +111,9 @@ app.use(async (req, res, next) => {
   let user
   try {
     if (req.session.user.usertype === 'user') {
-      user = await User.findOne({ username: req.session.user.username }).exec()
+      user = await (await User.findById(req.session.user._id).populate('notifications')).execPopulate()
     } else {
-      user = await Company.findOne({ email: req.session.user.email }).exec()
+      user = await (await Company.findById(req.session.user._id).populate('notifications')).execPopulate()
     }
   } catch (error) {
     console.log(error)
@@ -154,7 +156,9 @@ app.use(async (req, res, next) => {
   }
 })
 app.use('/users/', UserRouter)
+app.use('/notifications/', NotificationRouter)
 app.use('/post/', PostRouter)
+app.use('/chat', ChatRouter)
 app.use('/api/', ApiRouter)
 
 // catch 404 and forward to error handler

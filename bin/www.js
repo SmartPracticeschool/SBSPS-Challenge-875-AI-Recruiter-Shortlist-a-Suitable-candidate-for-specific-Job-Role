@@ -71,3 +71,5 @@ server.on('listening', () => {
     `\n${app.config.name} is listening on http://${app.config.http.host}:${addr.port}\n`
   )
 })
+
+module.exports = sio

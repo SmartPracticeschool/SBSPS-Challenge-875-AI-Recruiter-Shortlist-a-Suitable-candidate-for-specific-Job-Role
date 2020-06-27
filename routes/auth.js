@@ -1,4 +1,5 @@
 /* eslint-disable no-useless-escape */
+const bcrypt = require('bcrypt')
 const path = require('path')
 const mv = require('mv')
 const { v4 } = require('uuid')
@@ -212,16 +213,34 @@ router.get('/new/company/info', (req, res, next) => {
 })
 
 router.post('/new/company/info', formParser, async (req, res, next) => {
-  const randomId = v4()
-  const oldpath = req.files.logo.path
   const username = req.body.name
     .replace(/(~|`|!|@|#|$|%|^|&|\*|\(|\)|{|}|\[|\]|;|:|\"|'|<|,|\.|>|\?|\/|\\|\||-|_|\+|=)/g, '')
     .replace(/\s/g, '-')
     .toLowerCase()
 
+  const existingUser = await Company.findOne({ username }).exec()
+
+  if (existingUser) {
+    return res.status(400).render('auth/forms/company', {
+      title: req.app.config.name,
+      error: 'Account for this company already exists'
+    })
+  }
+
+  const randomId = v4()
+  const oldpath = req.files.logo.path
+
+  if (req.body.password !== req.body.password2) {
+    return res.status(400).send('auth/forms/company', {
+      title: req.app.config.name,
+      error: 'Passwords do not match'
+    })
+  }
+
   const type = req.files.logo.name.split('.').slice(-1)[0].toLowerCase()
   if (!['png', 'jpg', 'jpeg'].includes(type)) {
     return res.status(400).render('auth/forms/company', {
+      title: req.app.config.name,
       error: 'Unsupported file format'
     })
   }
@@ -250,13 +269,15 @@ router.post('/new/company/info', formParser, async (req, res, next) => {
       city: req.body.city,
       countryCode: req.body.countryCode,
       postalCode: req.body.postalCode
-    }
+    },
+    password: bcrypt.hashSync(req.body.password, 10)
   })
 
   try {
     await company.save()
   } catch (error) {
     return res.status(500).send('auth/forms/company', {
+      title: req.app.config.name,
       error: (error.name === 'MongoError' && error.code === 11000) ? 'Account for this company already exists' : error
     })
   }
@@ -268,6 +289,47 @@ router.post('/new/company/info', formParser, async (req, res, next) => {
       .slice(2)
       .slice(0, 5)
   )
+})
+
+router.get('/company/login', async (req, res, next) => {
+  res.render('auth/forms/login', {
+    title: req.app.config.name,
+    error: false
+  })
+})
+
+router.post('/company/login', async (req, res, next) => {
+  let user
+  try {
+    user = await Company.findOne({ username: req.body.username }).exec()
+  } catch (error) {
+    return res.status(500).render('auth/forms/login', {
+      title: req.app.config.name,
+      error: 'Internal server error'
+    })
+  }
+
+  if (!user) {
+    return res.status(400).render('auth/forms/login', {
+      title: req.app.config.name,
+      error: 'No company with that username found'
+    })
+  } else {
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      await (await user.populate('posts').populate('notifications')).execPopulate()
+      req.session.user = user
+      return res.redirect(
+        '/?logged-in=' + Math.random()
+          .toString()
+          .slice(2)
+          .slice(0, 5)
+      )
+    } else {
+      return res.status(400).render('auth/forms/login', {
+        error: 'Incorrect username/password'
+      })
+    }
+  }
 })
 
 module.exports = router

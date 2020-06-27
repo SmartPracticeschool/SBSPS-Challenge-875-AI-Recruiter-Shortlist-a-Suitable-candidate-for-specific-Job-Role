@@ -6,12 +6,28 @@ mongoose.connect(connectionUri, {
   useUnifiedTopology: true
 })
 
-const roomSchema = mongoose.Schema({
-  users: Array,
-  chats: {
-    type: Array,
-    default: [] // {txt:"Hi", by:"john", time:"10:35pm"}
+const messageSchema = mongoose.Schema({
+  txt: String,
+  by: {
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'onModel'
+  },
+  time: String,
+  onModel: {
+    type: String,
+    enum: ['Company', 'User']
   }
 })
 
-module.exports = mongoose.model('Room', roomSchema)
+const roomSchema = mongoose.Schema({
+  users: Array,
+  messages: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Message'
+  }]
+})
+
+module.exports = {
+  Message: mongoose.model('Message', messageSchema),
+  Room: mongoose.model('Room', roomSchema)
+}

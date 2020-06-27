@@ -101,9 +101,9 @@ router.get('/v1/notifications', async (req, res) => {
   let user
   try {
     if (req.session.user.usertype === 'user') {
-      user = await User.findOne({ username: req.session.user.username }).exec()
+      user = await (await User.findById(req.session.user._id).populate('notifications')).execPopulate()
     } else {
-      user = await Company.findOne({ username: req.session.user.username }).exec()
+      user = await (await Company.findById(req.session.user._id).populate('notifications')).execPopulate()
     }
   } catch (error) {
     console.log(error)
@@ -113,7 +113,7 @@ router.get('/v1/notifications', async (req, res) => {
   }
 })
 
-router.get('/v1/notifications/markAsRead', async (req, res, next) => {
+router.post('/v1/notifications/markAsRead', async (req, res, next) => {
   let user
   try {
     if (req.session.user.usertype === 'user') {
@@ -124,11 +124,9 @@ router.get('/v1/notifications/markAsRead', async (req, res, next) => {
   } catch (error) {
     console.log(error)
   }
-  if (user) {
-    user.notifications = []
-    await user.save()
-    res.redirect('/me/activity')
-  }
+  user.notifications = []
+  await user.save()
+  res.redirect('/notifications')
 })
 
 module.exports = router

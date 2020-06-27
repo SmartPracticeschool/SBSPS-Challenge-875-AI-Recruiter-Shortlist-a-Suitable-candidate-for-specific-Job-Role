@@ -41,7 +41,7 @@ const postSchema = mongoose.Schema({
   caption: String,
   category: {
     type: String,
-    enum: ['promotion', 'moment', 'event', 'thoughts', 'news']
+    enum: ['promotion', 'moment', 'engagement', 'thought', 'news/trending', 'meme/fact']
   },
   comments: [{
     type: mongoose.Schema.Types.ObjectId,

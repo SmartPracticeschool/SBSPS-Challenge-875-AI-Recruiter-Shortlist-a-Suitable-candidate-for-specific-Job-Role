@@ -13,6 +13,7 @@ const companySchema = mongoose.Schema({
     required: true,
     unique: true
   },
+  password: String,
   username: {
     type: String,
     required: true,
@@ -44,10 +45,10 @@ const companySchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room'
   }],
-  notifications: {
-    type: Array,
-    default: []
-  },
+  notifications: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Notification'
+  }],
   usertype: {
     type: String,
     default: 'company'
@@ -62,7 +63,11 @@ const companySchema = mongoose.Schema({
     postalCode: Number,
     area: String,
     city: String
-  }
+  },
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 })
 
 module.exports = mongoose.model('Company', companySchema)
