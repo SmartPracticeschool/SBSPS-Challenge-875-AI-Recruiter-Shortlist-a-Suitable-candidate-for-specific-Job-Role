@@ -8,7 +8,6 @@ router.get('/', (req, res, next) => {
       User.findOne({ username: req.session.user.username })
         .exec((error, currentUser) => {
           if (error) {
-            console.log(chalk.red(error))
             return res.render('error', { error: error })
           }
           res.render('index', {

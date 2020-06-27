@@ -44,10 +44,10 @@ const companySchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room'
   }],
-  notifications: {
-    type: Array,
-    default: []
-  },
+  notifications: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Notification'
+  }],
   usertype: {
     type: String,
     default: 'company'

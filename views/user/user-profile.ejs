@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <% if(user.usertype != currentUser.usertype || user.username != currentUser.username) { %>
                                         <div class="col-md-6">
-                                            <button type="button" id="follow-btn" data-follow="<%= user %>" style="margin-top:5px" class="btn btn-primary btn-sm">
+                                            <button type="button" id="follow-btn" data-follow="<%= user %>" style="margin-top:5px" class="btn btn-danger btn-sm">
                                                 <% if(user.followers && user.followers.find(x => x.usertype == currentUser.usertype && x._id == currentUser._id)) { %>
                                                     Unfollow
                                                 <% } else { %>
@@ -42,7 +42,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-6">
-                                            <a type="button" href="/chat/<%= user._id %>" style="margin-top:5px" class="btn btn-primary btn-sm">
+                                            <a type="button" href="/chat/user/<%= user._id %>" style="margin-top:5px" class="btn btn-success btn-sm">
                                                 Message
                                             </a>
                                         </div>
@@ -55,7 +55,7 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6" title="Know about user skills">
-                                        <a type="button" style="margin-top:5px" href="/users/user/@<%= user.username %>/resume/" class="btn btn-primary btn-sm">
+                                        <a type="button" style="margin-top:5px" href="/users/user/@<%= user.username %>/resume/" class="btn btn-warning btn-sm">
                                             Resume
                                         </a>
                                     </div>
