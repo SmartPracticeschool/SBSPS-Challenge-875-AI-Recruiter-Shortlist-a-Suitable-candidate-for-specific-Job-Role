@@ -5,7 +5,7 @@ const mime = require('mime-types')
 const router = require('express').Router()
 const { v4 } = require('uuid')
 const formParser = require('../../utils/parsers/form-parser')
-const { Post, Job } = require('../../models')
+const { Job, Post } = require('../../models')
 
 const validFileTypes = ['png', 'jpeg', 'gif', 'jpg', 'mov', 'mp4']
 
@@ -83,7 +83,7 @@ router.post('/job', async (req, res, next) => {
   const newJob = new Job({
     role: req.body.role,
     experience: req.body.experience,
-    skills: req.body['skills[]'],
+    skills: req.body.skills,
     description: req.body.description,
     pay: req.body.pay
   })
