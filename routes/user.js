@@ -45,8 +45,8 @@ router.get('/user/@:username', async (req, res, next) => {
 
   res.render('user/user-profile', {
     title: req.app.config.title,
-    user,
-    currentUser: req.session.user
+    user: req.session.user,
+    searchUser: user
   })
 })
 
@@ -69,9 +69,10 @@ router.get('/user/@:username/resume', async (req, res, next) => {
 router.get('/company/@:username', async (req, res, next) => {
   let company
   try {
-    company = await Company.find({ username: req.params.username }).exec()
+    company = await (await Company.findOne({ username: req.params.username }).populate('followers').populate('jobListings').populate({ path: 'posts', options: { lean: true } })).execPopulate()
   } catch (error) {
-    res.status(500).send({ message: 'Database error!' })
+    console.log(error)
+    return res.status(500).send({ message: 'Database error!' })
   }
 
   if (!company) {
@@ -82,7 +83,8 @@ router.get('/company/@:username', async (req, res, next) => {
 
   res.render('user/company-profile', {
     title: req.app.config.title,
-    company
+    company,
+    user: req.session.user
   })
 })
 
