@@ -14,6 +14,7 @@ const notificationSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     refPath: 'onModel'
   },
+  link: String,
   onModel: {
     type: String,
     enum: ['Company', 'User']

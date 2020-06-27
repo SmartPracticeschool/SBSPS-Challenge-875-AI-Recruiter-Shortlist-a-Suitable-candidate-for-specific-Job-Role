@@ -113,7 +113,7 @@ router.get('/v1/notifications', async (req, res) => {
   }
 })
 
-router.get('/v1/notifications/markAsRead', async (req, res, next) => {
+router.post('/v1/notifications/markAsRead', async (req, res, next) => {
   let user
   try {
     if (req.session.user.usertype === 'user') {
@@ -124,11 +124,9 @@ router.get('/v1/notifications/markAsRead', async (req, res, next) => {
   } catch (error) {
     console.log(error)
   }
-  if (user) {
-    user.notifications = []
-    await user.save()
-    res.redirect('/me/activity')
-  }
+  user.notifications = []
+  await user.save()
+  res.redirect('/notifications')
 })
 
 module.exports = router
