@@ -31,7 +31,7 @@
                             </div>
                             <div class="profile-userbuttons">
                                 <div class="row">
-                                    <% if(searchUser.usertype != user.usertype || searchUser.username != user.username) { %>
+                                    <% if(user.usertype !== 'company' && searchUser.username !== user.username) { %>
                                         <div class="col-md-6">
                                             <button type="button" id="follow-btn" data-follow="<%= searchUser %>" style="margin-top:5px" class="btn btn-danger btn-sm">
                                                 <% if(searchUser.followers && searchUser.followers.find(x => x.usertype == user.usertype && x._id == user._id)) { %>

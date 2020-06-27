@@ -31,7 +31,7 @@
               </div>
               <div class="profile-userbuttons">
                 <div class="row">
-                  <% if(company.usertype != user.usertype || company.username != user.username) { %>
+                  <% if(user.usertype !== 'company') { %>
                   <div class="col-md-6">
                     <button type="button" id="follow-btn" data-follow="<%= JSON.stringify(company) %>" style="margin-top: 5px;" class="btn btn-danger btn-sm">
                       <% if(company.followers && company.followers.find(x => x.usertype == user.usertype && x._id == user._id)) { %> Unfollow <% } else { %> Follow <% } %>
