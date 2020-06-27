@@ -7,6 +7,19 @@ mongoose.connect(connectionUri, {
   useUnifiedTopology: true
 })
 
+const notificationSchema = mongoose.Schema({
+  msg: String,
+  time: String,
+  for: {
+    type: mongoose.Schema.Types.ObjectId,
+    refPath: 'onModel'
+  },
+  onModel: {
+    type: String,
+    enum: ['Company', 'User']
+  }
+})
+
 const User = mongoose.Schema({
   username: String,
   accessToken: String,
@@ -127,14 +140,10 @@ const User = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     refPath: 'onModel'
   },
-  following: {
+  notifications: [{
     type: mongoose.Schema.Types.ObjectId,
-    refPath: 'onModel'
-  },
-  notifications: {
-    type: Array,
-    default: []
-  },
+    ref: 'Notification'
+  }],
   hirable: {
     type: Boolean,
     default: true
@@ -154,4 +163,7 @@ const User = mongoose.Schema({
 })
 
 // create the model for users and expose it to our app
-module.exports = mongoose.model('User', User)
+module.exports = {
+  User: mongoose.model('User', User),
+  Notification: mongoose.model('Notification', notificationSchema)
+}

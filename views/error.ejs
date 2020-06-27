@@ -22,7 +22,7 @@
       type="text/javascript"
       src="/scripts/vendor/bootstrap.min.js"
     ></script>
-    <script type="text/javascript" src="/scripts/vendor/dom.js"></script>
+    <script type="text/javascript" src="/scripts/dom.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css" />
   </head>
   <body>
@@ -36,11 +36,15 @@
       <p class="container-fluid">
         <code> <!-- <%= error.stack %> --> </code>
       </p>
+      <a class="btn btn-danger" href="/">Home</a>
     </div>
     <div id="notify_message" class="notify_message-success">
       <center>You are now a part of Apply-by-AI!</center>
     </div>
+    <%- include('components/footer') -%>
   </body>
+  <script type="text/javascript" src="/scripts/vendor/modernizr.custom.js"></script>
+  <script type="text/javascript" src="/scripts/vendor/notificationFx.js"></script>
   <script type="text/javascript">
     show_notification("Page not found!", "danger")
   </script>
