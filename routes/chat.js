@@ -1,4 +1,3 @@
-const { red } = require('chalk')
 const router = require('express').Router()
 const { Room, Company, User } = require('../models')
 const _ = require('underscore')
