@@ -28,7 +28,10 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <h4>Heads up!</h4>
         <p>
-          Make sure your answer is one message, so feel free to write it elsewhere and then copy paste
+          Make sure your answer is one message, so feel free to write it elsewhere and then copy paste.
+          <br>
+          <br>
+          Your application will only be considered after this round.
         </p>
       </div>
     </div>
@@ -55,7 +58,7 @@
       if (end === "Thank you so much for taking out the time for the interview!") {
         axios({
           method: "post",
-          url: "/ta",
+          url: "http://localhost:5000/ta",
           data: {
             text: whole_text
           },
@@ -67,7 +70,7 @@
         })
         axios({
           method: "post",
-          url: "/pa",
+          url: "http://localhost:5000/pa",
           data: {
             text: whole_text
           },

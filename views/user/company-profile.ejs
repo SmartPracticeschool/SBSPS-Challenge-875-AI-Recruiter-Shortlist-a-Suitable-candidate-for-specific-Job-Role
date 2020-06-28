@@ -68,34 +68,54 @@
             <div id="posts" class="profile-content tabs">
               <h2>Posts</h2>
               <br />
-              <div class="row">
-                <% if (company.posts && company.posts.length) { %> <% for(let post of company.posts) { %>
-                <div class="col-md-6">
-                  <div class="gram-card">
-                    <div class="gram-card-header">
-                      <h6>
-                        <a class="gram-card-content-user" href="">${post.timeago}</a>
-                      </h6>
+              <div class="row" style="height: 100vh; overflow-y: scroll;">
+                <% for(let post of company.posts) { %>
+                    <div class="col-md">
+                        <div class="gram-card">
+                            <div class="gram-card-header">
+                                <img class="gram-card-user-image lozad" src="<%= (company.usertype == 'user' ? company.resume.basics.picture : company.logo ) %>">
+                                <a class="gram-card-user-name" href="/users/<%= company.usertype %>/@<%= company.username %>">
+                                    <%= company.username %>
+                                </a>
+                                <div class="dropdown gram-card-time">
+                                    <% if(company.usertype === user.usertype && company.username === user.username) { %>
+                                        <a style="margin-left: 10px" title="Delete" href="/post/delete/<%= post._id %>">🗑</a>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <% if(post.staticUrl && ['png', 'jpg', 'gif', 'jpeg'].includes(post.type)) { %>
+                                <div class="gram-card-image">
+                                    <center>
+                                      <a href="<%= post.staticUrl %>" class="progressive replace">
+                                        <img author="<%= post.author.username %>" src="<%= post.staticUrl %>" id="<%= post._id %>" class="post img-responsive lozad preview">
+                                      </a> 
+                                    </center>
+                                </div>
+                            <% } else if(post.staticUrl) { %>
+                                <div class="gram-card-image">
+                                    <center>
+                                      <video author="<%= company.username %>" src="<%= post.staticUrl %>" id="<%= post._id %>" class="post img-responsive" controls></video>
+                                    </center>
+                                  </div>
+                            <% } %>
+                            <div class="gram-card-content">
+                                <p>
+                                    <a style="color: rgb(195, 173, 48);" class="gram-card-content-user" href="/users/<%= company.usertype %>/@<%= company.username %>"><%= company.username %>
+                                    </a>
+                                    <br>
+                                    <br>
+                                    <%= post.caption %>
+                                    <br>
+                                    <br>
+                                    <span class="label label-info"><%= post.category ? post.category : "Unknown" %></span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <br />
-                  <br />
-                  <% if(post.staticUrl) { %> <% if(['jpeg', 'png', 'gif', 'jpg'].includes(post.staticUrl)) { %>
-                  <div class="gram-card-image">
-                    <center>
-                      <img src="${post.staticUrl}" width="100%" />
-                    </center>
-                  </div>
-                  <% } else { %>
-                  <video src="${p.staticUrl}" id="${post._id}" class="post img-responsive" controls></video>
-                  <% } %> <% } %>
-                  <div class="gram-card-content">
-                    <p>${post.caption}</p>
-                    <span class="label label-info">${post.category}</span><br /><br />
-                  </div>
-                </div>
-                <% } %> <% } %>
-              </div>
+                <% } %>
+            </div>
             </div>
           </div>
         </div>
