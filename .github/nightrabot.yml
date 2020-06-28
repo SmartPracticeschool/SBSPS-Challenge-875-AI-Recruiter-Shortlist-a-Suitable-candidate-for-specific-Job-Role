@@ -50,8 +50,9 @@ nightrabot:
     name: "PR must follow semantic release"
     validate:
       - do: title
-        regex: ^(feat|docs|chore|fix|refactor|test|style|perf|ui)(\(\w+\))?:.+$
-        message: Semantic release conventions must be followed.
+        must_exclude:
+          regex: ^(feat|docs|chore|fix|refactor|test|style|perf|ui)(\(\w+\))?:.+$
+          message: Semantic release conventions must be followed.
       - do: description
         no_empty:
           enabled: true
