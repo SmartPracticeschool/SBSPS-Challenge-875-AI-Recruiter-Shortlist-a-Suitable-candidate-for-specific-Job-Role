@@ -49,24 +49,19 @@
         <% } %>
         <li class="list-group-item">
           <i class="fa fa-bell"></i>&nbsp;
-          <a title="Notifications" href="/notifications">Notifications</a>
+          <a title="Notifications" href="/notifications/">Notifications</a>
         </li>
       </ul>
-      <!-- <ul class="list-group">
-        <li class="list-group-item list-group-item-primary">Categories</li>
+      <% if(user.usertype === 'user') { %>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-primary">Jobs</li>
         <li class="list-group-item">
-          <i class="fa fa-mug-hot"></i>&nbsp;
-          <a href="/category/moments">moments</a>
+          <i class="fa fa-clock"></i>&nbsp;
+          <a title="Jobs" href="/post/job/list">Recent</a>
         </li>
-        <li class="list-group-item">
-          <i class="fa fa-guitar"></i>&nbsp;
-          <a href="/category/events">events</a>
-        </li>
-        <li class="list-group-item">
-          <i class="fa fa-brain"></i>&nbsp;
-          <a href="/category/thoughts">thoughts</a>
-        </li>
-      </ul> -->
+      </ul>
+      <% } %>
+      <ul class="list-group">
       <ul class="list-group">
         <li class="list-group-item list-group-item-primary">
           Tasks

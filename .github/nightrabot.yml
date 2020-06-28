@@ -2,6 +2,7 @@ branchName: short
 version: 2
 nightrabot:
   - when: issue.opened
+    name: 'Issue description should not be empty'
     validate:
       - do: description
         no_empty:
@@ -37,7 +38,7 @@ nightrabot:
       - do: title
         must_exclude:
           regex: ^\[WIP\]
-        message: This PR is marked Work in Progress and cannot be merged
+          message: This PR is marked Work in Progress and cannot be merged
       - do: description
         must_exclude:
           regex: wip
@@ -47,11 +48,8 @@ nightrabot:
         payload:
           body: This PR is marked Work in Progress and cannot be merged
   - when: pull_request.*, pull_request_review.*
-    name: "PR must follow semantic release"
+    name: "PR description must not be empty"
     validate:
-      - do: title
-        regex: ^(feat|docs|chore|fix|refactor|test|style|perf|ui)(\(\w+\))?:.+$
-        message: Semantic release conventions must be followed.
       - do: description
         no_empty:
           enabled: true

@@ -7,13 +7,39 @@ mongoose.connect(connectionUri, {
 })
 
 const applicationSchema = mongoose.Schema({
+  for: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Job'
+  },
   by: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  botRound: {
+    type: Boolean,
+    default: false
+  },
   selected: {
     type: Boolean,
     default: false
+  },
+  personality: {
+    wholeText: String,
+    openness: Number,
+    conscientiousness: Number,
+    extraversion: Number,
+    agreeableness: Number,
+    euroticism: Number
+  },
+  tone: {
+    text: String,
+    joy: Number,
+    anger: Number,
+    analytical: Number,
+    fear: Number,
+    confident: Number,
+    sadness: Number,
+    tentative: Number
   }
 })
 
