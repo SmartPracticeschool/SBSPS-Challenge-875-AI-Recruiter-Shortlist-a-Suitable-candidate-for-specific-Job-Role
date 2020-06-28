@@ -41,10 +41,12 @@
           <i class="fa fa-plus"></i>&nbsp;
           <a title="Share your thoughts" href="/post/upload/">Post</a>
         </li>
-        <li class="list-group-item">
-            <i class="fa fa-briefcase"></i>&nbsp;
-            <a title="Create a job" href="/post/job/">Post a Job</a>
-        </li>
+        <% if(user.usertype === 'company') { %>
+          <li class="list-group-item">
+              <i class="fa fa-briefcase"></i>&nbsp;
+              <a title="Create a job" href="/post/job/">Post a Job</a>
+          </li>
+        <% } %>
         <li class="list-group-item">
           <i class="fa fa-bell"></i>&nbsp;
           <a title="Notifications" href="/notifications">Notifications</a>

@@ -5,7 +5,7 @@ const mime = require('mime-types')
 const router = require('express').Router()
 const { v4 } = require('uuid')
 const formParser = require('../../utils/parsers/form-parser')
-const { Job, Post } = require('../../models')
+const { Company, Job, Post } = require('../../models')
 
 const validFileTypes = ['png', 'jpeg', 'gif', 'jpg', 'mov', 'mp4']
 
@@ -73,14 +73,20 @@ router.get('/delete/:id', async (req, res, next) => {
 })
 
 router.get('/job', (req, res, next) => {
-  res.render('post/job', {
-    title: req.app.config.name,
-    user: req.session.user
-  })
+  if (req.session.user.usertype !== 'company') {
+    return res.status(403).render('error', {
+      error: new Error('Forbidden')
+    })
+  } else {
+    res.render('post/job', {
+      title: req.app.config.name,
+      user: req.session.user
+    })
+  }
 })
 
 router.post('/job', async (req, res, next) => {
-  const newJob = new Job({
+  const job = new Job({
     role: req.body.role,
     experience: req.body.experience,
     skills: req.body.skills,
@@ -88,15 +94,20 @@ router.post('/job', async (req, res, next) => {
     pay: req.body.pay
   })
 
+  const user = await Company.findById(req.session.user._id).exec()
+  user.jobListings.push(job._id)
   try {
-    await newJob.save()
+    await job.save()
   } catch (error) {
     return res.status(500).render('error', {
       error: new Error('Failed to upload job. Please try again!')
     })
   }
+
+  await user.save()
+
   console.log(bgBlueBright('Job uploaded successfully'))
-  res.redirect('/')
+  return res.redirect('/?' + Date.now().toString().substring(0, 5))
 })
 
 module.exports = router
