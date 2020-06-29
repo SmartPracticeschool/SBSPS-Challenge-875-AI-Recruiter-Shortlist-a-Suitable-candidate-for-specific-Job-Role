@@ -161,7 +161,7 @@ router.get('/job/apply/:id', async (req, res, next) => {
     })
   }
 
-  const hasApplied = await Application.findOne({ _id: req.params.id, by: req.session.user._id }).exec()
+  const hasApplied = await Application.findOne({ for: req.params.id, by: req.session.user._id }).exec()
 
   if (hasApplied) {
     res.status(403).render('error', {
@@ -171,7 +171,8 @@ router.get('/job/apply/:id', async (req, res, next) => {
 
   res.render('chat/bot', {
     title: req.app.config.title,
-    user: req.session.user
+    user: req.session.user,
+    jobId: req.params.id
   })
 })
 

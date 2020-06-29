@@ -39,6 +39,7 @@
     "fuse.js": "6.2.1",
     "guid": "0.0.12",
     "http-errors": "1.7.3",
+    "ibm-watson": "5.6.0",
     "lodash": "4.17.15",
     "marked": "1.1.0",
     "mongoose": "5.9.19",

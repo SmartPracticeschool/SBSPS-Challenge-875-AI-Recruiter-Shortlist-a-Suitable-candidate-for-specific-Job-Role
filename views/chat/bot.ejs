@@ -58,19 +58,7 @@
       if (end === "Thank you so much for taking out the time for the interview!") {
         axios({
           method: "post",
-          url: "http://localhost:5000/ta",
-          data: {
-            text: whole_text
-          },
-          validateStatus: (status) => {
-            return true // I'm always returning true, you may want to do it depending on the status received
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
-        axios({
-          method: "post",
-          url: "http://localhost:5000/pa",
+          url: "/bot/<%= jobId %>/<%= user._id %>/",
           data: {
             text: whole_text
           },

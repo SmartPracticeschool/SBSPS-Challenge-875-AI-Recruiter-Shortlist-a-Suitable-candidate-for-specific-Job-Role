@@ -15,10 +15,6 @@ const applicationSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  botRound: {
-    type: Boolean,
-    default: false
-  },
   selected: {
     type: Boolean,
     default: false
