@@ -3,7 +3,7 @@ const ta = require('time-ago')
 const _ = require('underscore')
 const q = require('queue')({ autostart: true })
 const Fuse = require('fuse.js')
-const { Company, Post, User } = require('../../../models')
+const { Comment, Company, Like, Post, User } = require('../../../models')
 
 // Rate limiting
 router.use(function (req, res, next) {
@@ -80,7 +80,12 @@ router.get('/v1/posts', async (req, res) => {
     const page = req.query.page || 1
     let posts
     try {
-      posts = await Post.find().populate('author').populate('comments').populate('likes').lean().exec()
+      posts = await Post.find({}).populate('author').populate({
+        path: 'comments',
+        populate: {
+          path: 'by'
+        }
+      }).lean().exec()
     } catch (error) {
       console.log(error)
       return res.sendStatus(500)
@@ -127,6 +132,77 @@ router.post('/v1/notifications/markAsRead', async (req, res, next) => {
   user.notifications = []
   await user.save()
   res.redirect('/notifications')
+})
+
+router.post('/v1/like', async (req, res, next) => {
+  if (!req.session.user) {
+    res.status(404).send('Unauthorized')
+  }
+
+  let like
+  try {
+    like = await Like.findOne({
+      by: req.session.user._id,
+      onModel: (req.session.user.usertype === 'user' ? 'User' : 'Company'),
+      onPost: req.body._id
+    }).exec()
+  } catch (error) {
+    return res.status(500).render('error', {
+      error: new Error('Database error')
+    })
+  }
+
+  const post = await Post.findById(req.body._id).exec()
+
+  if (like) {
+    await Like.deleteOne({ _id: like._id })
+    post.likes = _.reject(post.likes, eachLike => eachLike.equals(like._id))
+    await post.save()
+    return res.status(202).send({
+      event: true,
+      msg: 'Unliked',
+      amount: post.likes.length
+    })
+  } else {
+    like = new Like({
+      by: req.session.user._id,
+      onModel: req.session.user.usertype === 'user' ? 'User' : 'Company',
+      onPost: req.body._id
+    })
+    await like.save()
+    post.likes.push(like._id)
+    await post.save()
+    return res.status(202).send({
+      event: true,
+      msg: 'Liked',
+      amount: post.likes.length
+    })
+  }
+})
+
+router.post('/v1/comment', async (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(400).send('Unauthorized')
+  }
+
+  const comment = new Comment({
+    by: req.session.user._id,
+    text: req.body.text,
+    onPost: req.body._id,
+    onModel: req.session.user.usertype === 'user' ? 'User' : 'Company'
+  })
+
+  const post = await Post.findById(req.body._id)
+  post.comments.push(comment._id)
+  await comment.save()
+  await post.save()
+  return res.json({
+    by: {
+      username: req.session.user.username,
+      usertype: req.session.user.usertype
+    },
+    amount: post.comments.length
+  })
 })
 
 module.exports = router

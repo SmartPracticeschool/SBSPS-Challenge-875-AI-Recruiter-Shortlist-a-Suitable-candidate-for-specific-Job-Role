@@ -74,10 +74,12 @@
           <span class="label label-info">${post.category ? post.category : "Unknown"}</span>
         </p>
 
-        <p class="comments">${post.comments.length} comment(s).</p>
+        <p class="comments" id="comments-amount-${post._id}">${post.comments.length} comment(s).</p>
+        <br>
+        <hr>
         <br>
         <div class="comments-div" id="comments-${post._id}">
-          ${post.comments.map(c => '<a class="user-comment" href="/users/' + c.by.usertype + '@' + c.by.username + '">@' + c.by.username + '</a>' + c.text + '<br>' ).join('')}
+          ${post.comments.map(c => '<a class="user-comment" href="/users/' + c.by.usertype + '@' + c.by.username + '">@' + c.by.username + '</a> ' + c.text + '<br>' ).join('')}
         </div>
         <hr>
       </div>
@@ -171,13 +173,9 @@
           }).done(function (data) {
             if (data.event) {
               $(elem).html(
-                $(elem)
-                .html()
-                .split('</i>')[0] +
-                '</i> ' +
+                (data.msg === 'Liked' ? '👍' : '👎') +
                 data.amount
               )
-              $(elem).css('color', data.msg != 'Liked!' ? '#f0b917' : 'grey')
               show_notification(data.msg, 'success')
             } else {
               show_notification(data.msg, 'danger')
@@ -199,7 +197,7 @@
                 method: 'POST',
                 url: '/api/v1/comment',
                 data: {
-                      post_id: el.id,
+                      _id: el.id,
                       author: $(el).attr('author'),
                       text: el.value
                   }
@@ -208,6 +206,7 @@
                   $('#comments-' + el.id).append(`<a class="user-comment" href="/users/${data.by.usertype}/@${data.by.username}">
                   @${data.by.username}
                   </a> ${el.value}<br>`);
+                  $('#comments-amount-' + el.id).html(data.amount + ' comments(s).')
                   el.value = ''
                   show_notification('Comment added!', 'success')
                 })

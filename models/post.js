@@ -15,6 +15,10 @@ const commentSchema = mongoose.Schema({
     type: String,
     required: [true, 'Comment must have a body']
   },
+  onPost: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
+  },
   onModel: {
     type: String,
     enum: ['Company', 'User']
@@ -29,6 +33,10 @@ const likeSchema = mongoose.Schema({
   onModel: {
     type: String,
     enum: ['User', 'Company']
+  },
+  onPost: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post'
   }
 })
 
