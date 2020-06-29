@@ -4,8 +4,12 @@
   "description": "AI recruitment platform",
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "test": "eslint"
   },
+  "pre-commit": [
+    "test"
+  ],
   "keywords": [],
   "repository": {
     "type": "git",
@@ -50,6 +54,7 @@
     "nodemon": "2.0.4",
     "passport": "0.4.1",
     "passport-google-oauth2": "0.2.0",
+    "pre-commit": "1.2.2",
     "prismjs": "1.20.0",
     "queue": "6.0.1",
     "request": "2.88.2",
