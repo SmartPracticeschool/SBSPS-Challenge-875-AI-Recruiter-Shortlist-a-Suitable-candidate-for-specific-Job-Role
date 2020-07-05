@@ -12,6 +12,7 @@ const { Company, User } = require('./models')
 const {
   AccountRouter,
   ApiRouter,
+  BotRouter,
   ChatRouter,
   PostRouter,
   NotificationRouter,
@@ -160,6 +161,7 @@ app.use('/notifications/', NotificationRouter)
 app.use('/post/', PostRouter)
 app.use('/chat', ChatRouter)
 app.use('/api/', ApiRouter)
+app.use('/bot/', BotRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

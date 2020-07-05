@@ -7,6 +7,7 @@ mongoose.connect(connectionUri, {
 })
 
 const applicationSchema = mongoose.Schema({
+  createdOn: String,
   for: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Job'
@@ -16,26 +17,27 @@ const applicationSchema = mongoose.Schema({
     ref: 'User'
   },
   selected: {
-    type: Boolean,
-    default: false
+    type: String,
+    enum: ['under review', 'selected', 'rejected'],
+    default: 'under review'
   },
   personality: {
-    wholeText: String,
+    wholeText: {
+      type: Array,
+      required: true
+    },
     openness: Number,
     conscientiousness: Number,
     extraversion: Number,
     agreeableness: Number,
-    euroticism: Number
+    neuroticism: Number
   },
   tone: {
-    text: String,
-    joy: Number,
-    anger: Number,
-    analytical: Number,
-    fear: Number,
-    confident: Number,
-    sadness: Number,
-    tentative: Number
+    score: Number,
+    name: {
+      type: String,
+      enum: ['joy', 'anger', 'analytical', 'fear', 'confident', 'sadness', 'tentative']
+    }
   }
 })
 

@@ -149,10 +149,6 @@ const User = mongoose.Schema({
     type: Boolean,
     default: true
   },
-  applications: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Job'
-  }],
   usertype: {
     type: String,
     default: 'user'

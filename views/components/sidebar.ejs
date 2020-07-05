@@ -27,7 +27,7 @@
         </li> -->
         <li class="list-group-item">
           <i class="fa fa-user"></i>&nbsp;
-          <a title="Your user profile" href="/users/<%= user.usertype %>/@<%= user.username %>" id="profile">Profile</a>
+          <a title="Your user profile" href="/users/<%= user.usertype %>/@<%= user.username %>" id="profile">@<%= user.username %></a>
         </li>
         <li class="list-group-item">
           <i class="fa fa-moon"></i>&nbsp;
@@ -58,6 +58,15 @@
         <li class="list-group-item">
           <i class="fa fa-clock"></i>&nbsp;
           <a title="Jobs" href="/post/job/list">Recent</a>
+        </li>
+      </ul>
+      <% } else { %>
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-primary">Jobs</li>
+        <li class="list-group-item">
+          <i class="fa fa-clock"></i>&nbsp;
+          <a title="Your user profile" href="/users/company/<%= user._id %>/jobs/posted" id="Jobs">Posted</a>
+          </a>
         </li>
       </ul>
       <% } %>

@@ -59,6 +59,12 @@
                         Posts
                       </a>
                     </li>
+                    <li name="jobs" class="tab">
+                      <a href="#" title="Jobs">
+                        <i class="fa fa-briefcase"></i>
+                        Jobs
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -116,6 +122,65 @@
                     </div>
                 <% } %>
             </div>
+            </div>
+            <div id="jobs" class="profile-content tabs">
+              <h2>Jobs</h2>
+              <br />
+              <div class="row" style="height: 100vh; overflow-y: scroll;">
+                <% for(let job of jobs) { %>
+                  <div class="col-md">
+                    <div class="gram-card">
+                      <div class="gram-card-header">
+                          <img class="gram-card-user-image lozad" src="<%= (company.logo ) %>">
+                          <a class="gram-card-user-name" href="/users/<%= company.usertype %>/@<%= company.username %>">
+                              <%= company.name %> @<%= company.username %>
+                          </a>
+                          <div class="dropdown gram-card-time">
+                              <% if(user.usertype === 'company' && company.username === user.username) { %>
+                                  <a style="margin-left: 10px" title="Delete" href="/job/delete/<%= job._id %>">🗑</a>
+                              <% } %>
+                          </div>
+                      </div>
+                      <br>
+                      <br>
+                      <div class="gram-card-content">
+                          <p>
+                              <br>
+                              <ul style="list-style-type: none;">
+                                  <li>
+                                      <b style="color: rgb(113, 211, 32)">Role:</b> <%= job.role %>
+                                  </li>
+                                  <li>
+                                      <b style="color: rgb(113, 211, 32)">Experience:</b> <%= job.experience %>
+                                  </li>
+                                  <li>
+                                      <b style="color: rgb(113, 211, 32)">Skills:</b> 
+                                      <% for (let skill of job.skills) { %>
+                                          <span class="label label-warning"><%= skill %></span>
+                                      <% } %>
+                                  </li>
+                                  <li>
+                                      <b style="color: rgb(113, 211, 32)">Description:</b> 
+                                      <br>
+                                      <%- job.description -%>
+                                  </li>
+                              </ul>
+                              <br>
+                              <br>
+                              <% if(user.usertype === 'user') { %>
+                                  <% if(!job.applications.find(application => application.by.username === user.username)) { %>
+                                    <a class="btn btn-success" href="/post/job/apply/<%= job._id %>">Apply</a>
+                                    <a class="btn btn-warning" href="mailto:<%= job.company.email %>?subject=Regarding opening for <%= job.role %>">Mail</a>
+                                  <% } %>
+                              <% } else if(user.usertype === 'company' && user.username === company.username) { %>
+                                  <a class="btn btn-success" href="/post/job/details/<%= job._id %>/">Details</a>
+                              <% } %>
+                          </p>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,9 @@
 const router = require('express').Router()
-const { User, Company } = require('../models')
 const ta = require('time-ago')
+const marked = require('marked')
+const _ = require('underscore')
+
+const { Application, Company, Job, User } = require('../models')
 
 router.get('/', async (req, res, next) => {
   let users, companies
@@ -81,10 +84,22 @@ router.get('/company/@:username', async (req, res, next) => {
     })
   }
 
+  let jobs = await Job.find({ company: company._id }).populate({
+    path: 'applications',
+    populate: {
+      path: 'by'
+    }
+  }).exec()
+
+  jobs = _.each(jobs, job => {
+    job.description = marked(job.description)
+  })
+
   res.render('user/company-profile', {
     title: req.app.config.title,
     company,
-    user: req.session.user
+    user: req.session.user,
+    jobs
   })
 })
 

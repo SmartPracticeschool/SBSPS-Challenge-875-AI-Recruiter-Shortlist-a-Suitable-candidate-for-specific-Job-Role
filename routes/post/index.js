@@ -89,7 +89,7 @@ router.get('/delete/:id', async (req, res, next) => {
     user = await Company.findById(req.session.user._id).exec()
   }
 
-  user.posts = _.without(user.posts, post => post._id.equals(req.params.id))
+  user.posts = _.without(user.posts, (post) => post._id.equals(req.params.id))
   await user.save()
 
   res.redirect('/')
@@ -141,9 +141,14 @@ router.get('/job/list', async (req, res, next) => {
       error: new Error('Forbidden')
     })
   }
-  let jobs = await Job.find({ hiring: true }).populate('company').lean().exec()
+  let jobs = await Job.find({ hiring: true }).populate('company').populate('applications').lean().exec()
 
-  jobs = _.each(jobs, job => {
+  jobs = _.reject(jobs, (job) => {
+    const found = _.find(job.applications, (application) => application.by.equals(req.session.user._id))
+    return found
+  })
+
+  jobs = _.each(jobs, (job) => {
     job.description = marked(job.description)
   })
 
@@ -151,6 +156,22 @@ router.get('/job/list', async (req, res, next) => {
     title: req.app.config.title,
     user: req.session.user,
     jobs: jobs.reverse()
+  })
+})
+
+router.get('/job/applied', async (req, res, next) => {
+  if (req.session.user.usertype === 'company') {
+    return res.status(403).render('error', {
+      error: new Error('Forbidden')
+    })
+  }
+
+  const applications = await Application.find({ by: req.session.user._id }).populate('for').exec()
+
+  res.render('jobs/applied', {
+    title: req.app.config.name,
+    user: req.session.user,
+    applications
   })
 })
 
@@ -165,7 +186,7 @@ router.get('/job/apply/:id', async (req, res, next) => {
 
   if (hasApplied) {
     res.status(403).render('error', {
-      error: new Error('You have already completed this sound. It may take sometime till the company gets back to you. Please stay tuned.')
+      error: new Error('You have already completed this round. It may take sometime till the company gets back to you. Please stay tuned.')
     })
   }
 
@@ -173,6 +194,51 @@ router.get('/job/apply/:id', async (req, res, next) => {
     title: req.app.config.title,
     user: req.session.user,
     jobId: req.params.id
+  })
+})
+
+router.get('/job/details/:id', async (req, res, next) => {
+  const job = await Job.findById(req.params.id)
+    .populate({
+      path: 'applications',
+      populate: {
+        path: 'by',
+        options: {
+          lean: true
+        }
+      }
+    })
+    .lean()
+    .exec()
+
+  if (!job) {
+    return res.status(404).send('error', {
+      error: new Error('No such job found')
+    })
+  }
+
+  if (req.session.user.usertype !== 'company' || !job.company.equals(req.session.user.id)) {
+    return res.status(403).send('error', {
+      error: new Error('Forbidden')
+    })
+  }
+
+  job.description = marked(job.description)
+
+  _.each(job.applications, (application) => {
+    const { conscientiousness, extraversion, agreeableness, neuroticism } = application.personality
+    application.matchingSkills = _.intersection(job.skills, _.map(_.pluck(application.by.resume.skills, 'keywords')[0], skill => skill.toLowerCase()))
+    application.rating = application.matchingSkills.length + conscientiousness + extraversion + agreeableness - neuroticism
+  })
+
+  job.applications = _.sortBy(job.applications, application => application.rating).reverse()
+
+  // return res.header('Content-Type', 'application/json').send(JSON.stringify(job, null, 2))
+
+  res.render('jobs/details', {
+    title: req.app.config.name,
+    user: req.session.user,
+    job
   })
 })
 

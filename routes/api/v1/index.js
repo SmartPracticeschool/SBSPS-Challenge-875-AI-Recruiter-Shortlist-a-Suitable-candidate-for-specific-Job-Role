@@ -3,7 +3,7 @@ const ta = require('time-ago')
 const _ = require('underscore')
 const q = require('queue')({ autostart: true })
 const Fuse = require('fuse.js')
-const { Comment, Company, Like, Post, User } = require('../../../models')
+const { Application, Comment, Company, Like, Post, User } = require('../../../models')
 
 // Rate limiting
 router.use(function (req, res, next) {
@@ -136,7 +136,7 @@ router.post('/v1/notifications/markAsRead', async (req, res, next) => {
 
 router.post('/v1/like', async (req, res, next) => {
   if (!req.session.user) {
-    res.status(404).send('Unauthorized')
+    res.status(403).send('Unauthorized')
   }
 
   let like
@@ -203,6 +203,44 @@ router.post('/v1/comment', async (req, res, next) => {
     },
     amount: post.comments.length
   })
+})
+
+router.post('/v1/application/:action', async (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(400).send('Unauthorized')
+  }
+
+  const application = await Application.findById(req.body._id).populate('for').exec()
+
+  if (!application) {
+    return res.status(404).send({
+      error: 'No application found'
+    })
+  }
+
+  if (req.session.user.usertype !== 'company' || !application.for.company.equals(req.session.user._id)) {
+    return res.status(403).send({
+      error: 'Forbidden'
+    })
+  }
+
+  if (req.params.action === 'hire') {
+    application.selected = 'selected'
+    await application.save()
+    return res.status(202).send({
+      message: 'Hired'
+    })
+  } else if (req.params.action === 'reject') {
+    application.selected = 'rejected'
+    await application.save()
+    return res.status(202).send({
+      message: 'Rejected'
+    })
+  } else {
+    return res.status(403).send({
+      error: 'What are you trying to do -_-!'
+    })
+  }
 })
 
 module.exports = router

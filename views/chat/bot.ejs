@@ -43,14 +43,12 @@
     }
   </script>
   <script>
-    var whole_text = ""
+    var whole_text = []
     var msg_text = ""
     function sendhandler(obj) {
       //console.log("object type:"+obj.type);
       msg_text = obj.data.input.text
-      whole_text = whole_text + " " + msg_text
-      console.log(msg_text)
-      console.log(whole_text)
+      whole_text.push(msg_text)
     }
     function receivehandler(event) {
       console.log("last response:", event.data.output.generic[0].text)
