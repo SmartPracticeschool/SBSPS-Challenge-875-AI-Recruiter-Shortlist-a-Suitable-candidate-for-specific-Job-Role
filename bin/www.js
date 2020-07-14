@@ -3,9 +3,8 @@
 /**
  * Module dependencies.
 */
-
 const app = require('../app')
-var debug = require('debug')('v2.0.0:server')
+const debug = require('debug')('v2.0.0:server')
 const http = require('http')
 const io = require('socket.io')
 const mongoAdapter = require('socket.io-adapter-mongo')
@@ -41,7 +40,15 @@ sio.adapter(mongoAdapter(app.config.db.connectionUri))
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port)
+if (process.env.NODE_ENV === 'production') {
+  const appEnv = require('cfenv').appEnv()
+  server.listen(appEnv.port, appEnv.bind, () => {
+    console.log('Server started on ' + appEnv.url)
+  })
+} else {
+  server.listen(port)
+}
+
 /**
 * Event listener for HTTP server "error" event.
 */

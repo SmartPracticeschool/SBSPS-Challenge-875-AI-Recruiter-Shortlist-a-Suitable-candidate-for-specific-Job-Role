@@ -32,20 +32,10 @@
               <div class="profile-userbuttons">
                 <div class="row">
                     <div class="col-md-6">
-                        <a type="button" href="#" style="margin-top: 5px;" class="btn btn-success btn-sm">
-                          Some Button
-                        </a>
+                        <% for(let skill of job.skills) { %>
+                          <span class="label label-warning"><%= skill %></span>
+                        <% } %>
                     </div>
-                </div>
-                <div class="profile-usermenu">
-                  <ul class="nav">
-                    <li name="posts" class="tab active">
-                      <a href="#" title="Applications">
-                        <i class="fa fa-paper-clip"></i>
-                        Posts
-                      </a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
@@ -68,8 +58,10 @@
                             <br>
                             <div class="gram-card-content">
                                 <p>
-                                    <a style="color: rgb(195, 173, 48);" class="gram-card-content-user" href="/users/user/@<%= application.by.username %>"><%= application.by.username %>
-                                    </a>
+                                    <% for(let skill of application.matchingSkills) { %>
+                                      <span class="label label-info"><%= skill %></span>
+                                    <% } %>
+                                    <br>
                                     <br>
                                     <i>Q1. Tell me about yourself</i>
                                     <br>
@@ -106,9 +98,6 @@
                                     </span>
                                     <br>
                                     <br>
-                                    <% for(let skill of application.matchingSkills) { %>
-                                        <span class="label label-info"><%= skill %></span>
-                                    <% } %>
                                     <hr>
                                     <div class="gram-card-footer">
                                         <a type="button" href="https://buzzy.netlify.app" target="_blank" style="margin: 5px 5px;" class="btn btn-warning btn-sm">
