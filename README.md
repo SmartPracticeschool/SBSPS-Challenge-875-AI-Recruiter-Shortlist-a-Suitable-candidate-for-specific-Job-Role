@@ -2,7 +2,6 @@
   <img src="./public/images/logo/logo.png" width="200" alt="Logo">
 
   <h3 align="center">Apply-by-AI</h3>
-
   <p align="center">
     Looking for candidates that rightly match your job requirements?
     Let AI handle it for you.
@@ -24,6 +23,7 @@
 
 - [About the Project](#about-the-project)
   - [Features](#features)
+  - [Contributors](#contributors)
 
 ## About The Project
 
@@ -44,3 +44,11 @@ Our platform lets you filter developers by basic technical skills that developer
 #### 3. Applicant approved
 
 Technical candidates love our platform. Apply-by-AI is not just fast, it is way more fun than sending plain emails. We understand the tedious part of uploading a resume and managing one and help you offload it to your platform.
+
+### Contributors
+
+- [Soham Parekh](https://github.com/und3fined-v01d)
+- [Vidhi Mody](https://github.com/vidhi-mody)
+- [Vrushti Mody](https://github.com/vrushti-mody)
+- [Darshee Machhar](https://github.com/darshee-m)
+
