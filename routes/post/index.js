@@ -148,6 +148,12 @@ router.get('/job/list', async (req, res, next) => {
     return found
   })
 
+  jobs = _.sortBy(jobs, (job) => {
+    return _.intersection(job.skills, req.session.user.resume.skills).length
+  })
+
+  jobs = jobs.reverse()
+
   jobs = _.each(jobs, (job) => {
     job.description = marked(job.description)
   })
@@ -230,6 +236,8 @@ router.get('/job/details/:id', async (req, res, next) => {
     application.matchingSkills = _.intersection(job.skills, _.map(_.pluck(application.by.resume.skills, 'keywords')[0], skill => skill.toLowerCase()))
     application.rating = application.matchingSkills.length + conscientiousness + extraversion + agreeableness - neuroticism
   })
+
+  console.log(job.applications)
 
   job.applications = _.sortBy(job.applications, application => application.rating).reverse()
 
