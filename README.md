@@ -26,8 +26,8 @@
   - [Contributors](#contributors)
 - [Video Demo](#video-demo)
 - [Report](#report)
-  - [Doc](#doc)
   - [PPT](#ppt)
+  - [Doc](#doc)
 
 ## About The Project
 
@@ -60,8 +60,8 @@ Technical candidates love our platform. Apply-by-AI is not just fast, it is way 
 
 ### Report
 
-#### [Doc](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/Report.docx)
+#### [PPT](https://docs.google.com/presentation/d/11IM6dbcM1Zh26qXlRffgYX6BvPnl_atGK240jdbtJ0w/edit?usp=sharing)
 
-#### [PPT](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/project.pptx)
+#### [Doc](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/Report.docx)
 
 
