@@ -24,7 +24,7 @@
 - [About the Project](#about-the-project)
   - [Features](#features)
   - [Contributors](#contributors)
-- [Video Demo](#video-demo)
+- [Working Demo of the application](#video-demo)
 - [Report](#report)
   - [PPT](#ppt)
   - [Doc](#doc)
