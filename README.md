@@ -24,6 +24,8 @@
 - [About the Project](#about-the-project)
   - [Features](#features)
   - [Contributors](#contributors)
+- [Video Demo](#video-demo)
+- [Report](#report)
 
 ## About The Project
 
@@ -51,4 +53,13 @@ Technical candidates love our platform. Apply-by-AI is not just fast, it is way 
 - [Vidhi Mody](https://github.com/vidhi-mody)
 - [Vrushti Mody](https://github.com/vrushti-mody)
 - [Darshee Machhar](https://github.com/darshee-m)
+
+### [Video Demo](./DEMO.mp4)
+
+### Report
+
+#### [Doc](./REPORT.docx)
+
+#### [PPT](/.REPORT.pptx)
+
 
