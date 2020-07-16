@@ -22,6 +22,7 @@
 ## Table of Contents
 
 - [About the Project](#about-the-project)
+  - [Set Up](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/DEVELOPERS.md)
   - [Features](#features)
   - [Contributors](#contributors)
 - [Working Demo of the application](#video-demo)
