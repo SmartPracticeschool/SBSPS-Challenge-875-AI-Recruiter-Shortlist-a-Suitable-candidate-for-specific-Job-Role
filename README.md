@@ -60,8 +60,8 @@ Technical candidates love our platform. Apply-by-AI is not just fast, it is way 
 
 ### Report
 
-#### [Doc](./Report.docx)
+#### [Doc](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/Report.docx)
 
-#### [PPT](/.project.pptx)
+#### [PPT](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/project.pptx)
 
 
