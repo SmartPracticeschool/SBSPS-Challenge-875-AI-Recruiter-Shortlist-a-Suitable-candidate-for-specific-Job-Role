@@ -60,8 +60,8 @@ Technical candidates love our platform. Apply-by-AI is not just fast, it is way 
 
 ### Report
 
-#### [Doc](./REPORT.docx)
+#### [Doc](./Report.docx)
 
-#### [PPT](/.REPORT.pptx)
+#### [PPT](/.project.pptx)
 
 
