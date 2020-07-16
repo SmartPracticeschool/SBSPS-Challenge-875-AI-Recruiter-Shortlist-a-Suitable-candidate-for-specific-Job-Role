@@ -26,6 +26,8 @@
   - [Contributors](#contributors)
 - [Video Demo](#video-demo)
 - [Report](#report)
+  - [Doc](#doc)
+  - [PPT](#ppt)
 
 ## About The Project
 
