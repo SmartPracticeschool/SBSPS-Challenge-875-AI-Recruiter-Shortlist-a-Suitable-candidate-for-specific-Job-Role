@@ -4,7 +4,6 @@ const marked = require('marked')
 const mv = require('mv')
 const mime = require('mime-types')
 const router = require('express').Router()
-const { v4 } = require('uuid')
 const _ = require('underscore')
 const formParser = require('../../utils/parsers/form-parser')
 const { Application, Company, Job, Post, User } = require('../../models')
@@ -20,7 +19,7 @@ router.get('/upload', (req, res, next) => {
 
 router.post('/upload', formParser, async (req, res, next) => {
   let finalLocation, mimetype
-  const randomId = v4()
+  const randomId = Date.now()
 
   if (req.files.filetoupload.name) {
     const oldpath = req.files.filetoupload.path

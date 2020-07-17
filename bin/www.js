@@ -41,7 +41,7 @@ sio.adapter(mongoAdapter(app.config.db.connectionUri))
  */
 
 if (process.env.NODE_ENV === 'production') {
-  const appEnv = require('cfenv').appEnv()
+  const appEnv = require('cfenv').getAppEnv()
   server.listen(appEnv.port, appEnv.bind, () => {
     console.log('Server started on ' + appEnv.url)
   })

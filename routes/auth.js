@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const imgbbUploader = require('imgbb-uploader')
 const path = require('path')
 const mv = require('mv')
-const { v4 } = require('uuid')
 const router = require('express').Router()
 const passport = require('passport')
 const lodash = require('lodash')
@@ -228,7 +227,7 @@ router.post('/new/company/info', formParser, async (req, res, next) => {
     })
   }
 
-  const randomId = v4()
+  const randomId = Date.now()
   const oldpath = req.files.logo.path
 
   if (req.body.password !== req.body.password2) {
