@@ -12,7 +12,7 @@
         ><img
             width="50"
             style="border-radius: 50%;"
-            src="<%= user.profile_picture %>"
+            src="<%= user.usertype === 'company' ? user.logo : user.resume.basics.picture %>"
         /></a>
 
         <a

@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-escape */
 const bcrypt = require('bcrypt')
+const imgbbUploader = require('imgbb-uploader')
 const path = require('path')
 const mv = require('mv')
 const { v4 } = require('uuid')
@@ -246,7 +247,6 @@ router.post('/new/company/info', formParser, async (req, res, next) => {
   }
 
   const newpath = path.join(__dirname, '..', 'public', 'company', `${username}_${randomId}_${req.files.logo.name}`)
-  const finalLocation = `/company/${username}_${randomId}_${req.files.logo.name}`
 
   mv(oldpath, newpath, (error) => {
     if (error) {
@@ -254,11 +254,13 @@ router.post('/new/company/info', formParser, async (req, res, next) => {
     }
   })
 
+  const { image: { url } } = await imgbbUploader(process.env.IMGBB_API_KEY, path.resolve(newpath))
+
   const company = new Company({
     name: req.body.name,
     username,
     email: req.body.email,
-    logo: finalLocation,
+    logo: url,
     website: req.body.website,
     size: req.body.size,
     description: req.body.description,

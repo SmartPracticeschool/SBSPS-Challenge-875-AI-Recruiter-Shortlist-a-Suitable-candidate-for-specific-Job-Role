@@ -45,6 +45,7 @@
     "guid": "0.0.12",
     "http-errors": "1.7.3",
     "ibm-watson": "5.4.0",
+    "imgbb-uploader": "^1.0.3",
     "lodash": "^4.17.19",
     "marked": "1.1.0",
     "mongoose": "5.9.19",
