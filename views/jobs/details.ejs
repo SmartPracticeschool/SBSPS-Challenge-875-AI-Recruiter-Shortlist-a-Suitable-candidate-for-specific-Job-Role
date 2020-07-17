@@ -45,7 +45,7 @@
             <div id="applications" class="profile-content tabs">
               <h2>Applications</h2>
               <br />
-              <div class="row" style="height: 100vh; overflow-y: scroll;">
+              <div class="row">
                 <canvas id="canvas" width="100%" class="chartjs-render-monitor"></canvas>
                 <% for(let application of job.applications) { %>
                     <div class="col-md">
@@ -198,13 +198,14 @@
     }
 
     var applications = JSON.parse('<%- JSON.stringify(job.applications) %>')
+    var totalSkills = '<%- JSON.stringify(job.skills.length) %>'
     var datasets = []
     for(let application of applications) {
       datasets.push({
         label: application.by.username,
         backgroundColor: getRandomColor(),
         data: [
-          application.matchingSkills.length,
+          application.matchingSkills.length/totalSkills,
           application.personality.openness,
           application.personality.conscientiousness,
           application.personality.extraversion,
@@ -215,7 +216,7 @@
     }
 
     var barChartData = {
-      labels: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
+      labels: ['Skills', 'Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
       datasets
     }
 
