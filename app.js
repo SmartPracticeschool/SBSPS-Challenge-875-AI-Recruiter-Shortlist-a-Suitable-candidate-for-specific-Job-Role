@@ -70,8 +70,8 @@ const date = new Date()
 app.events = [
   {
     title: 'Apply-by-AI',
-    text: 'Launching soon...',
-    img: '/images/station.png',
+    text: 'Think Recruitment? Think Apply-by-AI !',
+    img: '/images/4-large.png',
     time: [date, date.setDate(date.getDate() + 1)],
     link: {
       link_url: 'https://github.com/und3fined-v01d/apply-by-ai',
