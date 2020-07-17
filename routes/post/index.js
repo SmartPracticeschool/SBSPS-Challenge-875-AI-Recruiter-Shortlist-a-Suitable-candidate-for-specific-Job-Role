@@ -152,8 +152,6 @@ router.get('/job/list', async (req, res, next) => {
     return _.intersection(job.skills, req.session.user.resume.skills).length
   })
 
-  jobs = jobs.reverse()
-
   jobs = _.each(jobs, (job) => {
     job.description = marked(job.description)
   })

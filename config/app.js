@@ -1,4 +1,5 @@
-const dbHost = process.env.DBHOST || 'localhost'
+require('dotenv').config()
+const dbHost = process.env.DBHOST || 'mongodb://localhost:27017/apply-by-ai'
 
 module.exports = {
   name: 'apply-by-ai',
@@ -10,7 +11,7 @@ module.exports = {
   author: 'und3fined-v01d',
   version: '1.0.0',
   db: {
-    connectionUri: `mongodb://${dbHost}:27017/apply-by-ai`,
+    connectionUri: dbHost,
     params: {},
     collections: ['moment', 'user', 'feeling', 'ask']
   }

@@ -1,9 +1,54 @@
 const router = require('express').Router()
-const ta = require('time-ago')
-const _ = require('underscore')
-const q = require('queue')({ autostart: true })
 const Fuse = require('fuse.js')
+const ta = require('time-ago')
+const nodemailer = require('nodemailer')
+const sgTransport = require('nodemailer-sendgrid-transport')
+const path = require('path')
+const q = require('queue')({ autostart: true })
+const EmailTemplates = require('swig-email-templates')
+const _ = require('underscore')
 const { Application, Comment, Company, Like, Post, User } = require('../../../models')
+
+const sendEmail = async (application) => {
+  const options = {
+    auth: {
+      api_key: process.env.SENDGRID_API_KEY
+    }
+  }
+
+  console.log(options)
+  const transporter = nodemailer.createTransport(sgTransport(options))
+  const templates = new EmailTemplates({
+    root: path.resolve(path.join(__dirname, '..', '..', '..', 'views', 'components')),
+    swig: {
+      cache: false
+    }
+  })
+
+  const context = {
+    user: application.by,
+    company: application.for.company,
+    job: application.for,
+    sender: 'noreply.applybyai@gmail.com'
+  }
+  return new Promise((resolve) => {
+    templates.render('email-template.html', context, (error, html, text, subject) => {
+      if (error) {
+        console.log(error)
+      } else {
+        transporter.sendMail({
+          from: 'noreply.applybyai@gmail.com',
+          to: application.by.resume.basics.email,
+          subject: `Response from ${application.for.company.name} for your ${application.for.role} Application`,
+          html,
+          text
+        }).then(() => {
+          return resolve()
+        })
+      }
+    })
+  })
+}
 
 // Rate limiting
 router.use(function (req, res, next) {
@@ -210,7 +255,12 @@ router.post('/v1/application/:action', async (req, res, next) => {
     return res.status(400).send('Unauthorized')
   }
 
-  const application = await Application.findById(req.body._id).populate('for').exec()
+  const application = await Application.findById(req.body._id).populate('by').populate({
+    path: 'for',
+    populate: {
+      path: 'company'
+    }
+  }).exec()
 
   if (!application) {
     return res.status(404).send({
@@ -226,6 +276,7 @@ router.post('/v1/application/:action', async (req, res, next) => {
 
   if (req.params.action === 'hire') {
     application.selected = 'selected'
+    await sendEmail(application)
     await application.save()
     return res.status(202).send({
       message: 'Hired'

@@ -63,6 +63,8 @@
           validateStatus: (status) => {
             return true // I'm always returning true, you may want to do it depending on the status received
           }
+        }).then(() => {
+          window.location.href = "/";
         }).catch((error) => {
           console.log(error)
         })
