@@ -10,6 +10,15 @@ const { Application, Company, Job, Post, User } = require('../../models')
 
 const validFileTypes = ['png', 'jpeg', 'gif', 'jpg', 'mov', 'mp4']
 
+const getRandomColor = () => {
+  var letters = '0123456789ABCDEF'.split('')
+  var color = '#'
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  return color
+}
+
 router.get('/upload', (req, res, next) => {
   res.render('post/upload', {
     title: req.app.config.name,
@@ -236,12 +245,26 @@ router.get('/job/details/:id', async (req, res, next) => {
 
   job.applications = _.sortBy(job.applications, application => application.rating).reverse()
 
-  // return res.header('Content-Type', 'application/json').send(JSON.stringify(job, null, 2))
+  const barChartDataset = _.map(job.applications, application => {
+    return {
+      label: application.by.username,
+      backgroundColor: getRandomColor(),
+      data: [
+        application.matchingSkills.length / job.skills.length,
+        application.personality.openness,
+        application.personality.conscientiousness,
+        application.personality.extraversion,
+        application.personality.agreeableness,
+        application.personality.neuroticism
+      ]
+    }
+  })
 
   res.render('jobs/details', {
     title: req.app.config.name,
     user: req.session.user,
-    job
+    job,
+    barChartDataset
   })
 })
 

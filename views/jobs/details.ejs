@@ -188,32 +188,7 @@
     }
   </script>
   <script>
-    function getRandomColor() {
-      var letters = '0123456789ABCDEF'.split('')
-      var color = '#'
-      for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)]
-      }
-      return color
-    }
-
-    var applications = JSON.parse('<%- JSON.stringify(job.applications) %>')
-    var totalSkills = '<%- JSON.stringify(job.skills.length) %>'
-    var datasets = []
-    for(let application of applications) {
-      datasets.push({
-        label: application.by.username,
-        backgroundColor: getRandomColor(),
-        data: [
-          application.matchingSkills.length/totalSkills,
-          application.personality.openness,
-          application.personality.conscientiousness,
-          application.personality.extraversion,
-          application.personality.agreeableness,
-          application.personality.neuroticism
-        ]
-      })
-    }
+    var datasets = JSON.parse('<%- JSON.stringify(barChartDataset) %>')
 
     var barChartData = {
       labels: ['Skills', 'Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Neuroticism'],
