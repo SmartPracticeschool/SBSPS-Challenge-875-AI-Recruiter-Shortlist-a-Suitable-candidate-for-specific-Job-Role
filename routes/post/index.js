@@ -231,11 +231,9 @@ router.get('/job/details/:id', async (req, res, next) => {
 
   _.each(job.applications, (application) => {
     const { conscientiousness, extraversion, agreeableness, neuroticism } = application.personality
-    application.matchingSkills = _.intersection(job.skills, _.map(_.pluck(application.by.resume.skills, 'keywords')[0], skill => skill.toLowerCase()))
+    application.matchingSkills = _.intersection(job.skills, _.map(_.union(..._.pluck(application.by.resume.skills, 'keywords')), skill => skill.toLowerCase()))
     application.rating = application.matchingSkills.length + conscientiousness + extraversion + agreeableness - neuroticism
   })
-
-  console.log(job.applications)
 
   job.applications = _.sortBy(job.applications, application => application.rating).reverse()
 
