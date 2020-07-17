@@ -1,112 +1,165 @@
 <!DOCTYPE html>
-<html>
-  <%- include('components/head') -%>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css" />
-  <link rel="stylesheet" type="text/css" href="/stylesheets/moment.css" />
-  <body>
-    <%- include('components/navbar') -%>
-    <div class="landing-main">
-      <!-- Banner -->
-      <section id="banner">
-        <div class="inner">
-          <h2 class="major special">
-            <span class="landing-headline">
-              Looking for candidates that rightly match your job requirements? Let AI handle it for you.
-              <br>
-              <br>
-              Our customers spend around 50% less time screening candidates. Instant and automated. The no-review pre-screen.
-            </span>
-          </h2>
-          <!--<p>to organizations adopting Opensource</p>-->
-          <ul class="actions special stacked">
-            <li>
-              <a href="/account/google/" id="loginButton" class="button primary large">
-                <span class="icon solid brands fa-google"></span>
-                User
-              </a>
-            </li>
-            <li>
-              <a href="/account/company/login/" id="loginButton" class="button primary large">
-                <i class="fa fa-building"></i>
-                Org
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Apply by AI</title>
+  <link rel="icon" href="images/logo/logo.png" />
 
-      <!-- One -->
-      <section id="one" class="wrapper alt style2"></section>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-      <!-- Two -->
-      <section id="two" class="wrapper alt">
-        <section class="spotlight">
-          <div class="image"><img src="images/1.png" alt="" /></div>
-          <div class="content">
-            <h3 class="major subheadline">
-              <span class="icon solid major fa-plug"></span>
-              Saves Precious Time
-            </h3>
-            <p>
-              Does your team spend too much time screening candidates? 
-              Let it get back to doing what they do best - building the product - and let automation do the tedious work for you.
-            </p>
-          </div>
-        </section>
-        <section class="spotlight">
-          <div class="image"><img src="images/2.png" alt="" /></div>
-          <div class="content">
-            <h3 class="major subheadline">
-              <span class="icon solid major fa-ticket-alt"></span>
-              Fast and relevant
-            </h3>
-            <p>
-              Our platform lets you filter developers by basic technical skills that developers use everyday. 
-              This is way faster than a phone pre-screen, more relevant than a resume stuffed full of buzzwords.
-            </p>
-          </div>
-        </section>
-        <section class="spotlight">
-          <div class="image"><img src="images/3.png" alt="" /></div>
-          <div class="content">
-            <h3 class="major subheadline">
-              <span class="icon solid major fa-ticket-alt"></span>
-              Applicant approved
-            </h3>
-            <p>
-              Technical candidates love our platform. 
-              Apply-by-AI is not just fast, it is way more fun than sending plain emails. 
-              We understand the tedious part of uploading a resume and managing one and help you offload it to your platform.
-            </p>
-          </div>
-        </section>
-      </section>
-
-      <!-- Three -->
-      <section id="three" class="wrapper style1 special">
-        <div class="inner narrow">
-          <h3 class="major special">
-            Apply-by-AI is the engine of hope & innovation
-          </h3>
-          <p>
-            Behind Apply-by-AI is a distributed team of developers, designers &
-            thinkers who are unreasonably hopeful about a brighter future. We believe
-            in quality over quantity.
-          </p>
-          <ul class="actions special">
-            <li><a href="#" class="button primary large">Get started</a></li>
-          </ul>
-        </div>
-      </section>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.min.css">
+  <link rel="stylesheet" href="stylesheets/vendor/applybyai.css">
+  <script src="https://use.fontawesome.com/2e471ae38d.js"></script>
+</head>
+<body>
+  <section class="hero-banner hero-banner--sm mb-30px">
+    <div class="container">
+      <div class="hero-banner--sm__content">
+        <h1>Think recruitment? Think Apply-By-AI!</h1>
+        <h5>Looking for candidates that rightly match your job requirements? Let AI handle it for you. <br>
+        Our users spend around 50% less time screening candidates. Instant and automated. The no-review pre-screen.
+        </h5>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+        <br>
+        <br>
+        <a href="/account/google/" class="button button-header bg">Candidate Login</a>
+        <br>
+        <br>
+        <a href="/account/company/login/" class="button button-header md">Organization Login</a> 
+        </nav>
+      </div>
     </div>
-    <div id="notify_message" class="notify_message-success"></div>
-    <%- include('components/footer') -%>
-  </body>
+  </section>
+  <!--================ Hero sm Banner end =================-->
 
-  <script src="scripts/vendor/breakpoints.min.js"></script>
-  <script src="scripts/vendor/browser.min.js"></script>
-  <script src="scripts/vendor/classie.js"></script>
-  <script src="scripts/vendor/main.js"></script>
-  <script src="scripts/vendor/jquery.scrolly.min.js"></script>
-  <script src="scripts/util.js"></script>
+  
+  <!--================ Offer section start =================-->      
+  <section class="section-margin">
+    <div class="container">
+      <div class="section-intro pb-85px text-center">
+        <h2 class="section-intro__title">What We Offer</h2>
+        <p class="section-intro__subtitle">
+        We are a recruitment agency which provides a unique solution to the manual recruitment process. 
+        We can help you through the interview system. Our goal is to bring an objective and diverse approach to
+        a previously subjective recruitment process. We recognize the need for organizations to make data-backed 
+        hiring decisions and limit biases in their recruiting processes.
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="row offer-single-wrapper">
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-timer"></i>
+                </span>
+                <h4>Saves Precious Time</h4>
+                <p>
+                Does your team spend too much time screening candidates? 
+              Let it get back to doing what they do best - building the product - and let automation do the tedious work for you.
+              </p>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-bolt"></i>
+                </span>
+                <h4>Fast and relevant</h4>
+                <p>
+                Our platform lets you filter developers by basic technical skills that developers use everyday. 
+              This is way faster than a phone pre-screen, more relevant than a resume stuffed full of buzzwords.
+              </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row offer-single-wrapper">
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-medall"></i>
+                </span>
+                <h4>Reduces bias in judgments</h4>
+                <p>Our methodology perpetuates as little inequity as possible. Every candidate is given a fair chance.</p>
+              </div>
+            </div>
+            
+            <div class="col-lg-6 offer-single">
+              <div class="card offer-single__content text-center">
+                <span class="offer-single__icon">
+                  <i class="ti-search"></i>
+                </span>
+                <h4>Helps find the right candidate</h4>
+                <p>
+                Our candidate selection process incorporates a combination of both skills and personality to score a candidate. 
+                Thus, it paves a way for fully automated, hassle-free hiring.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-6">
+          <div class="offer-single__img">
+            <img class="img-fluid" src="images/offer.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================ Offer section end =================-->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+    integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+</body>
+<script src="/scripts/vendor/darkreader.min.js"></script>
+<script>
+  console.log(window.location.href)
+  if (
+    window.location.href.split("?logged-in") &&
+    window.location.href.split("?logged-in").length > 1
+  ) {
+    show_notification("Welcome to Appy-by-AI")
+    window.history.pushState(null, null, window.location.pathname)
+  }
+
+  if (localStorage.nightMode === "on") {
+    toggleNight(true)
+  } else {
+    toggleNight(false)
+  }
+  $("#darkmode").on("click", function () {
+    toggleNight()
+  })
+  function toggleNight(night = "other") {
+    if (night != "other") {
+      if (night == true) {
+        localStorage.nightMode = "on"
+        DarkReader.enable()
+      } else {
+        localStorage.nightMode = "off"
+        DarkReader.disable()
+      }
+    } else {
+      if (localStorage.nightMode == "on") {
+        DarkReader.disable()
+        localStorage.nightMode = "off"
+      } else {
+        localStorage.nightMode = "on"
+        DarkReader.enable()
+      }
+    }
+    return localStorage.nightMode
+  }
+</script>
 </html>
