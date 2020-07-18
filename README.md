@@ -11,6 +11,12 @@
     Instant and automated. The no-review pre-screen.
     <br />
     <br />
+    Powered by IBM Watson, our platform leverages state-of-the-art 
+    natural language understanding and machine learning techniques 
+    to deliver one of the industry's most robust and engaging conversational
+    experience.Through open-ended, natural and dynamic conversations, we are
+    able to gather deep candidate insights and help you hire fresh, data-driven 
+    talent for your pipeline.
     <a href="https://github.com/und3fined-v01d/apply-by-ai/issues">Report Bug</a>
     ·
     <a href="https://github.com/und3fined-v01d/apply-by-ai/issues">Submit Feature</a>
@@ -64,5 +70,3 @@ Technical candidates love our platform. Apply-by-AI is not just fast, it is way 
 #### [PPT](https://docs.google.com/presentation/d/11IM6dbcM1Zh26qXlRffgYX6BvPnl_atGK240jdbtJ0w/edit?usp=sharing)
 
 #### [Doc](https://github.com/SmartPracticeschool/SBSPS-Challenge-875-AI-Recruiter-Shortlist-a-Suitable-candidate-for-specific-Job-Role/blob/master/Report.docx)
-
-
