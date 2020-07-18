@@ -14,7 +14,7 @@
     Powered by IBM Watson, our platform leverages state-of-the-art 
     natural language understanding and machine learning techniques 
     to deliver one of the industry's most robust and engaging conversational
-    experience.Through open-ended, natural and dynamic conversations, we are
+    experience. Through open-ended, natural and dynamic conversations, we are
     able to gather deep candidate insights and help you hire fresh, data-driven 
     talent for your pipeline.
     <br>
