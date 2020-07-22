@@ -30,6 +30,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/user/@:username', async (req, res, next) => {
   let user
+  let applications = []
   try {
     user = await (await User.findOne({ username: req.params.username }).populate('followers').populate('posts')).execPopulate()
   } catch (error) {
@@ -46,9 +47,26 @@ router.get('/user/@:username', async (req, res, next) => {
     })
   }
 
+  if (user.usertype === req.session.user.usertype && user.username === req.session.user.username) {
+    applications = await Application.find({ by: user._id }).populate({
+      path: 'for',
+      populate: {
+        path: 'company'
+      },
+      options: {
+        lean: true
+      }
+    }).exec()
+    applications = _.each(applications, application => {
+      application.for.description = marked(application.for.description)
+    })
+    applications = applications.reverse()
+  }
+
   res.render('user/user-profile', {
     title: req.app.config.title,
     user: req.session.user,
+    applications,
     searchUser: user
   })
 })

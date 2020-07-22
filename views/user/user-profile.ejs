@@ -70,6 +70,12 @@
                                                     Posts
                                                 </a>
                                         </li>
+                                        <li name="applications" class="tab active">
+                                            <a href="#" title="Applications">
+                                                <i class="fa fa-briefcase"></i>
+                                                    Applications
+                                                </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -128,6 +134,53 @@
                                 <% } %>
                             </div>
                         </div>
+                        <div id="applications" class="profile-content tabs" style="display:none">
+                            <h2>Applications</h2>
+                            <br />
+                            <div class="row" style="height: 100vh; overflow-y: scroll;">
+                              <% for(let application of applications) { %>
+                                <div class="col-md">
+                                  <div class="gram-card">
+                                    <div class="gram-card-header">
+                                        <img class="gram-card-user-image lozad" src="<%= (application.for.company.logo ) %>">
+                                        <a class="gram-card-user-name" href="/users/company/@<%= application.for.company.username %>">
+                                            <%= application.for.company.name %> @<%= application.for.company.username %>
+                                        </a>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="gram-card-content">
+                                        <p>
+                                            <br>
+                                            <ul style="list-style-type: none;">
+                                                <li>
+                                                    <b style="color: rgb(113, 211, 32)">Role:</b> <%= application.for.role %>
+                                                </li>
+                                                <li>
+                                                    <b style="color: rgb(113, 211, 32)">Experience:</b> <%= application.for.experience %>
+                                                </li>
+                                                <li>
+                                                    <b style="color: rgb(113, 211, 32)">Skills:</b> 
+                                                    <% for (let skill of application.for.skills) { %>
+                                                        <span class="label label-warning"><%= skill %></span>
+                                                    <% } %>
+                                                </li>
+                                                <li>
+                                                    <b style="color: rgb(113, 211, 32)">Description:</b> 
+                                                    <br>
+                                                    <%- application.for.description -%>
+                                                </li>
+                                            </ul>
+                                            <br>
+                                            <br>
+                                            <span class="label label-info"><%= application.selected %></span>
+                                        </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              <% } %>
+                            </div>
+                          </div>
                     </div>
                 </div>
             </div>
