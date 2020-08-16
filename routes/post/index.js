@@ -167,7 +167,7 @@ router.get('/job/list', async (req, res, next) => {
   res.render('jobs/index', {
     title: req.app.config.title,
     user: req.session.user,
-    jobs: jobs.reverse()
+    jobs
   })
 })
 

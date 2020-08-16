@@ -173,7 +173,7 @@
       const elem = this
       $.ajax({
         method: 'POST',
-        url: `/api/v1/application/hire?cache=${Math.random()}`,
+        url: `/api/v1/application/reject?cache=${Math.random()}`,
         data: {
           _id: this.id.toString(),
         } 
