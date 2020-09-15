@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## Clear contents of a file
+git pull origin -y master &&
 rm README.md &&
 touch README.md
 
