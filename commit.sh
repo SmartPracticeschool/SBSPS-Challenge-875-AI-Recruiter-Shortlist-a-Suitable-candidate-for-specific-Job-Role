@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# for i in {1..18}
-# do
-    
-# done
-for ((i=1; i<=10; i++))
+## Clear contents of a file
+rm README.md &&
+touch README.md
+
+## Make a commit set number of times
+for ((i=1; i<=20; i++))
 do
   echo "Hello world" >> README.md &&
     git add . &&
