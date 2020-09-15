@@ -6,7 +6,7 @@ rm README.md &&
 touch README.md
 
 ## Make a commit set number of times
-for ((i=1; i<=45; i++))
+for ((i=1; i<=250; i++))
 do
   echo "Hello world" >> README.md &&
     git add . &&
